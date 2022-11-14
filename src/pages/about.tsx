@@ -11,7 +11,7 @@ export default function About() {
         
             <main>
                 <h1 className='font-medium leading-tight text-5xl mt-0 mb-2 text-blue-600'>About page</h1>
-                <p>This is a test page</p>
+                <p>This is a test page.</p>
             </main>
         </>
     )
