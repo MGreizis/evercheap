@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import styles from '../../styles/Home.module.css'
 
 export default function Home() {
   return (
@@ -9,7 +10,7 @@ export default function Home() {
           <link rel="icon" href="/favicon.ico" />
         </Head>
 
-        <main>
+        <main className={styles.main}>
           <h1 className='font-medium leading-tight text-5xl mt-0 mb-2 text-blue-600'>Index page</h1>
         </main>
       </>
