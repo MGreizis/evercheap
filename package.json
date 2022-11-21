@@ -11,10 +11,12 @@
   "dependencies": {
     "@headlessui/react": "^1.7.4",
     "@heroicons/react": "^2.0.13",
+    "@rikvanhaaren/ah_shop_api": "^1.0.4",
     "@supabase/supabase-js": "^2.1.0",
     "@types/node": "18.11.9",
     "@types/react": "18.0.25",
     "@types/react-dom": "18.0.8",
+    "aldi-wrapper": "^1.0.0",
     "eslint": "8.27.0",
     "eslint-config-next": "13.0.3",
     "express": "^4.18.2",
