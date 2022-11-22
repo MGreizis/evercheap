@@ -5,6 +5,7 @@ import BackgroundBlobOrange from "../components/backgroundBlobOrange";
 import BackgroundBlobWhite from "../components/backgroundBlobWhite";
 import Styles from "../../styles/Feature.module.css";
 import Image from "next/image";
+import React from "react";
 
 export default function Features() {
   return (
