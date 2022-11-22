@@ -11,7 +11,7 @@ module.exports = {
         protocol: 'https',
         hostname: 'dummyimage.com',
         port: '',
-        pathname: '/720x600',
+        pathname: '/720x600/**',
       },
     ],
   },

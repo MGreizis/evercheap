@@ -36,7 +36,7 @@ export default function Features() {
                 <Image
                   className="object-cover object-center rounded"
                   alt="hero"
-                  src="https://dummyimage.com/720x600"
+                  src="https://dummyimage.com/720x600/bababa/000000&text=Picture+of+the+marketplace"
                   width={720}
                   height={600}
                 />
@@ -50,7 +50,7 @@ export default function Features() {
                 <Image
                   className="object-cover object-center rounded"
                   alt="hero"
-                  src="https://dummyimage.com/720x600"
+                  src="https://dummyimage.com/720x600/bababa/000000&text=Picture+of+the+marketplace"
                   width={720}
                   height={600}
                 />
