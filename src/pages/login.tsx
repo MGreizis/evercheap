@@ -34,7 +34,6 @@ const Login = () => {
                 theme="dark"
               />
             ) : (
-            //   <p>Account page will go here.</p>
             <Account session={session}/>
             )}
           </div>
