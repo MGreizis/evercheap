@@ -13,7 +13,7 @@ export interface Database {
         firstName: string;
         lastName: string;
         username: string;
-        Row: Property;
+        Row: any;
       };
 
       Views: {
