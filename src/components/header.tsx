@@ -39,12 +39,12 @@ export default function Header() {
             ))}
           </div>
           <div className="hidden lg:flex lg:min-w-0 lg:flex-1 lg:justify-end">
-            <a
+            <Link
               href="/login"
               className="inline-block rounded-lg px-3 py-1.5 text-sm font-semibold bg-secondary leading-6 text-primary shadow-sm ring-1 ring-secondary hover:ring-secondary hover:bg-tertiary"
             >
               {!session ? "Log in" : "Account"}
-            </a>
+            </Link>
           </div>
         </nav>
       </div>
