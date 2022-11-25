@@ -36,7 +36,9 @@ const Login = () => {
               <p>Account page will go here.</p>
             )}
           </div>
+          <BackgroundBlobWhite />
         </main>
+        <Footer />
       </div>
     </>
   );
