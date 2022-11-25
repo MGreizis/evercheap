@@ -1,11 +1,31 @@
-interface Profiles {
-  id: string /* primary key */;
-  updated_at?: string;
-  username?: Text;
-  firstName?: Text;
-  lastName?: Text;
-}
-
+export type Json =
+  | string
+  | number
+  | boolean
+  | null
+  | { [key: string]: Json }
+  | Json[];
 export interface Database {
-    profiles: Profiles;
+  public: {
+    Tables: {
+      profiles: {
+        id: string;
+        firstName: string;
+        lastName: string;
+        username: string;
+        Row: Property;
+      };
+
+      Views: {
+        [_ in never]: never;
+      };
+      Functions: {
+        [_ in never]: never;
+      };
+
+      Enums: {
+        [_ in never]: never;
+      };
+    };
+  };
 }
