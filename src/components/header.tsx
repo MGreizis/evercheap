@@ -1,4 +1,5 @@
-import Link from 'next/link'
+import Link from "next/link";
+import { useSession } from "@supabase/auth-helpers-react";
 
 const navigation = [
   { name: "Product", href: "/about" },
@@ -8,6 +9,7 @@ const navigation = [
 ];
 
 export default function Header() {
+  const session = useSession();
   return (
     <div className="px-6 pt-6 lg:px-8">
       <div>
@@ -37,12 +39,12 @@ export default function Header() {
             ))}
           </div>
           <div className="hidden lg:flex lg:min-w-0 lg:flex-1 lg:justify-end">
-            <a
-              href="#"
+            <Link
+              href="/login"
               className="inline-block rounded-lg px-3 py-1.5 text-sm font-semibold bg-secondary leading-6 text-primary shadow-sm ring-1 ring-secondary hover:ring-secondary hover:bg-tertiary"
             >
-              Log in
-            </a>
+              {!session ? "Log in" : "Account"}
+            </Link>
           </div>
         </nav>
       </div>
