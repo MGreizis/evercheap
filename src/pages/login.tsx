@@ -6,6 +6,7 @@ import Header from "../components/header";
 import BackgroundBlobOrange from "../components/backgroundBlobOrange";
 import BackgroundBlobWhite from "../components/backgroundBlobWhite";
 import Styles from "../../styles/Home.module.css";
+import Account from "../components/account";
 
 const Login = () => {
   const session = useSession();
@@ -33,7 +34,8 @@ const Login = () => {
                 theme="dark"
               />
             ) : (
-              <p>Account page will go here.</p>
+            //   <p>Account page will go here.</p>
+            <Account session={session}/>
             )}
           </div>
           <BackgroundBlobWhite />
