@@ -11,13 +11,6 @@ router.get('/', cors(), (req, res, next) => {
   res.json('Welcome to the dawg api 🐶');
 });
 
-app.use((req, res, next) => {
-  res.append('Access-Control-Allow-Origin', '*');
-  res.append('Access-Control-Allow-Headers', 'Content-Type');
-  res.set('Access-Control-Expose-Headers', '*')
-  next();
-})
-
 /**
  * all stores routes
  */

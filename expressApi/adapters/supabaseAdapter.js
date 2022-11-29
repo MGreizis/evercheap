@@ -2,11 +2,11 @@ import * as dotenv from 'dotenv';
 import { createClient } from '@supabase/supabase-js';
 dotenv.config({ path: 'variables.env' });
 
-console.log('url', process.env.NEXT_PUBLIC_SUPABASE_URL);
+console.log('url', process.env.SUPABASE_URL);
 
 // my supabase client
 const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL,
+  process.env.SUPABASE_URL,
   process.env.SUPABASE_KEY
 );
 
