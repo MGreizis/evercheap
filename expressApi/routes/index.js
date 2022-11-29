@@ -1,26 +1,54 @@
 import express from 'express';
-import fs from 'fs';
+import cors from 'cors';
 const router = express.Router();
+import {
+  getStore,
+  getStores,
+} from '../controllers/storeController.js';
 
-// setting up the right path to the json folder.
-import path from 'path';
-import { fileURLToPath } from 'url';
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-// 👇️ find the path to the data folder containing de json
-const reqpath = path.join(__dirname, '..', 'data');
-
-// routes
-router.get('/', (req, res, next) => {
-  res.json('hi');
+// root level route, this one is optional
+router.get('/', cors(), (req, res, next) => {
+  res.json('Welcome to the dawg api 🐶');
 });
 
-// better not to use listStore just use /stores
-router.get('/stores', function (req, res) {
-  console.log(`..${__dirname}`);
-  fs.readFile(`${reqpath}/stores.json`, 'utf8', function (err, data) {
-    console.log(data);
-    res.end(data);
+app.use((req, res, next) => {
+  res.append('Access-Control-Allow-Origin', '*');
+  res.append('Access-Control-Allow-Headers', 'Content-Type');
+  res.set('Access-Control-Expose-Headers', '*')
+  next();
+})
+
+/**
+ * all stores routes
+ */
+ router.options('/stores', (req, res, next) => {
+  //set header before response
+  res.header({
+    allow: 'GET, POST, OPTIONS',
+    'Content-type': 'application/json',
+    Data: Date.now(),
+    'Content-length': 0,
+  });
+  //response
+  res.sendStatus(200);
+});
+
+// get a collection of all the stores and ou can use a query
+router.get('/stores', cors(), getStores);
+
+// get an individual store
+router.get('/stores/:id', cors(), getStore);
+
+// post a route using the middleware for reading the body
+// router.post('/stores', cors(), setStore);
+
+// delete an individual store
+// TODO: not implemented yet
+router.delete('/stores/:id', cors(), (req, res, next) => {
+  const store = req.params.store;
+  res.json({
+    title: 'deleted',
+    message: `oops ${store} was deleted accidentally 🥺`,
   });
 });
 
