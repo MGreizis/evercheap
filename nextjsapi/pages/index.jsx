@@ -4,7 +4,7 @@ export default function Home() {
 	// pages/index.js
 	const [error, setError] = useState(null);
 	const [isLoaded, setIsLoaded] = useState(false);
-	const [products, setShops] = useState([]);
+	const [stores, setShops] = useState([]);
 
 	useEffect(() => {
 		fetch("http://localhost:3010/stores")
@@ -28,13 +28,16 @@ export default function Home() {
 	} else {
 		return (
 			<div className={styles.container}>
-				{Array.from(products.data).map(store => (
-					<div key={store.id} className={styles.main}>
+				<ul>
+				{stores.data.map(store => (
+					<li key={store.id} className={styles.main}>
 						<div>
 							<h1>{store.name}</h1>
+              				<h1>{store.id}</h1>
 						</div>
-					</div>
+					</li>
 				))}
+				</ul>
 			</div>
 		);
 	}
