@@ -29,10 +29,10 @@ export async function getStores(req, res) {
       stores.data = [];
       rows.map((store) => {
         stores.data.push({
-          url_to_self: `${req.originalUrl}/${store.id}`,
-          date: store.date,
+          id: store.id,
           state: store.state,
           timeslot: store.timeslot,
+          name: store.name,
         });
       });
       res.json(stores);

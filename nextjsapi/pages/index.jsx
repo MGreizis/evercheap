@@ -1,7 +1,7 @@
 import styles from '../styles/Home.module.css';
 import React, { useState, useEffect } from 'react';
+
 export default function Home() {
-	// pages/index.js
 	const [error, setError] = useState(null);
 	const [isLoaded, setIsLoaded] = useState(false);
 	const [stores, setShops] = useState([]);
