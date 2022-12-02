@@ -4,7 +4,7 @@ import { useSession } from "@supabase/auth-helpers-react";
 const navigation = [
   { name: "Product", href: "/about" },
   { name: "Features", href: "/features" },
-  { name: "Marketplace", href: "#" },
+  { name: "Marketplace", href: "/marketplace" },
   { name: "Company", href: "#" },
 ];
 
