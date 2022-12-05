@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Combobox from "react-widgets/Combobox";
 
+function getData(event){
+	console.log('testing', event)
+}
+
 export default function Home() {
 
 
@@ -35,22 +39,26 @@ export default function Home() {
 		return (	
 			<><div>
 
-				<button onClick={callStore(shop)}>Potvrdiť</button>
-				{/* <select id="shops" value={shop}
-						onChange={(e) => setShop(e.value)}>
-							<option value="lidl">lidl</option>
-							<option value="ah">ah</option>
-							<option value="jumbo">jumbo</option>
+				{/* <div>
+				<select id="shops" value={shop}
+						onChange={(e) => setShop(e.target.value)}>
+							{stores.data.map(store => (
+							<option value={store.value}>{store.name}</option>))}
 						</select>
 						<h1>Selected shop: {shop}</h1>
 						</div> */}
+
+				{/* <button onClick={callStore(shop)}>confirm</button> */}
+				<button onClick={getData}>confirm</button>
+
 
 				<Combobox
 					hideCaret
 					hideEmptyPopup
 					data={stores.data.map(store => (store.name))}
 					value={shop.name} // set selected value
-					onChange={(e) => setShop(e.target.value)}
+					// onChange={(event) => setShop(event.target.value)}
+					onChange={getData}
   
 />
 			</div><div>
@@ -69,8 +77,8 @@ export default function Home() {
 	}
 }
 
-function callStore(nazov) {
-console.log("tu som")
+function callStore(name) {
+console.log("I am here")
 
 
 	
