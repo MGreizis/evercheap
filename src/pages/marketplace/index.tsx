@@ -7,6 +7,7 @@ import Styles from "../../../styles/Marketplace.module.css";
 import { useSession } from "@supabase/auth-helpers-react";
 import Login from "../login";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Index() {
   const session = useSession();
@@ -29,12 +30,12 @@ export default function Index() {
               <div className="grid overflow-hidden grid-cols-3 grid-rows-2 gap-2 h-auto mx-3 pt-16">
                 <div className="box row-span-2 flex flex-col">
                   <h1 className={Styles.title}>Shopping Cart</h1>
-                  <a
+                  <Link
                     href="/marketplace/compare"
                     className="justify-self-center self-center py-2.5 mb-4 mt-auto bg-white w-[90%] text-primary text-center text-middle rounded-lg font-semibold shadow-sm ring-1 ring-secondary hover:ring-secondary hover:bg-tertiary"
                   >
                     Compare
-                  </a>
+                  </Link>
                 </div>
                 <div className="box row-end-auto col-start-2 col-span-2">
                   <h1 className={Styles.title}>
