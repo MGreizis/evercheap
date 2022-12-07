@@ -14,7 +14,7 @@ router.get('/', cors(), (req, res, next) => {
 /**
  * all products routes
  */
- router.options('/products', (req, res, next) => {
+ router.options('/stores/products', (req, res, next) => {
   //set header before response
   res.header({
     allow: 'GET, POST, OPTIONS',
@@ -30,14 +30,14 @@ router.get('/', cors(), (req, res, next) => {
 router.get('/stores/products', cors(), getProducts);
 
 // get an individual product
-router.get('/products/:id', cors(), getProduct);
+router.get('/stores/products/:id', cors(), getProduct);
 
 // post a route using the middleware for reading the body
 // router.post('/products', cors(), setproduct);
 
 // delete an individual product
 // TODO: not implemented yet
-router.delete('/products/:id', cors(), (req, res, next) => {
+router.delete('/stores/products/:id', cors(), (req, res, next) => {
   const product = req.params.product;
   res.json({
     title: 'deleted',

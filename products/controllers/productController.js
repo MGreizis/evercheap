@@ -31,7 +31,7 @@ export async function getProducts(req, res) {
         products.data.push({
           id: product.id,
           state: product.state,
-          timeslot: product.timeslot,
+          // timeslot: product.timeslot,
           name: product.name,
         });
       });
