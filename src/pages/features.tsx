@@ -2,7 +2,6 @@ import Head from "next/head";
 import Footer from "../components/footer";
 import Header from "../components/header";
 import BackgroundBlobOrange from "../components/backgroundBlobOrange";
-import BackgroundBlobWhite from "../components/backgroundBlobWhite";
 import Styles from "../../styles/Feature.module.css";
 import Image from "next/image";
 import React from "react";
@@ -26,10 +25,17 @@ export default function Features() {
             <div className="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
               <div className="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
                 <h1 className="title-font sm:text-4xl text-3xl mb-4 font-medium text-primary">
-                  Aliquip voluptate ut officia eiusmod proident est labore qui excepteur amet laborum adipisicing fugiat.
+                  Aliquip voluptate ut officia eiusmod proident est labore qui
+                  excepteur amet laborum adipisicing fugiat.
                 </h1>
                 <p className="mb-8 leading-relaxed text-secondary text-lg">
-                  Lorem do eu officia in nulla irure mollit nostrud. Ad aute duis labore consequat <a href="#map" className="underline text-primary">occaecat dolore et dolor</a> esse officia non cupidatat consectetur incididunt. Eu eu enim et tempor esse duis eu consectetur.
+                  Lorem do eu officia in nulla irure mollit nostrud. Ad aute
+                  duis labore consequat{" "}
+                  <a href="#map" className="underline text-primary">
+                    occaecat dolore et dolor
+                  </a>{" "}
+                  esse officia non cupidatat consectetur incididunt. Eu eu enim
+                  et tempor esse duis eu consectetur.
                 </p>
               </div>
               <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
@@ -57,10 +63,15 @@ export default function Features() {
               </div>
               <div className="lg:flex-grow md:w-1/2 lg:pl-24 md:pl-16 flex flex-col md:items-start md:text-left items-center text-center">
                 <h1 className="title-font sm:text-4xl text-3xl mb-4 font-medium text-primary">
-                  Velit nostrud exercitation ipsum laboris id velit sunt eiusmod consequat.
+                  Velit nostrud exercitation ipsum laboris id velit sunt eiusmod
+                  consequat.
                 </h1>
                 <p className="mb-8 leading-relaxed text-secondary text-lg">
-                  Nostrud nisi enim nisi consequat reprehenderit consectetur magna. Culpa velit do officia cupidatat et commodo sint sit eu adipisicing. Nostrud consequat amet et velit et duis reprehenderit aliqua deserunt minim dolore dolor. Incididunt enim est ad occaecat ex do cillum nostrud qui aliquip.
+                  Nostrud nisi enim nisi consequat reprehenderit consectetur
+                  magna. Culpa velit do officia cupidatat et commodo sint sit eu
+                  adipisicing. Nostrud consequat amet et velit et duis
+                  reprehenderit aliqua deserunt minim dolore dolor. Incididunt
+                  enim est ad occaecat ex do cillum nostrud qui aliquip.
                 </p>
               </div>
             </div>
@@ -121,7 +132,6 @@ export default function Features() {
               </div>
             </div>
           </section>
-          <BackgroundBlobWhite />
         </main>
         <Footer />
       </div>
