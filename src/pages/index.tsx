@@ -4,6 +4,7 @@ import Styles from "../../styles/Home.module.css";
 import Header from "../components/header";
 import BackgroundBlobOrange from "../components/backgroundBlobOrange";
 import BackgroundBlobWhite from "../components/backgroundBlobWhite";
+import Link from "next/link";
 
 export default function Index() {
   return (
@@ -32,12 +33,12 @@ export default function Index() {
                     you want.
                   </p>
                   <div className="mt-8 flex gap-x-4 sm:justify-center">
-                    <a
-                      href="#"
+                    <Link
+                      href="/marketplace"
                       className="inline-block rounded-lg bg-secondary px-4 py-1.5 text-base font-semibold leading-7 text-primary shadow-sm ring-1 ring-secondary hover:bg-tertiary hover:ring-secondary"
                     >
                       Get started
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
