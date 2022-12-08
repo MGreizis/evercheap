@@ -10,6 +10,7 @@ import Link from "next/link";
 import ProductFilters from "../../components/productFilters";
 import { useUser, useSupabaseClient, Session } from "@supabase/auth-helpers-react";
 import { Database } from "../../../utils/database.types";
+import React from "react";
 type Products = Database["public"]["Tables"]["products"]["Row"];
 
 export default function Index() {
@@ -23,6 +24,10 @@ export default function Index() {
   function ProductBox({ children }: Products) {
     return (
       <div className="border-2 border-secondary rounded-xl bg-tertiary h-48 w-3/4 my-3">
+        <p className="text-center text-primary font-semibold">Product Name</p>
+        <p className="text-center text-primary font-semibold">Product Price</p>
+        <p className="text-center text-primary font-semibold">Store</p>
+        <p className="text-center text-primary font-semibold">Nutriscore</p>
         {children}
       </div>
     );
@@ -73,75 +78,41 @@ export default function Index() {
                   <div className="h-56 grid grid-cols-3 gap-4 content-start pl-10 pt-6">
                     {/* <ProductFilters /> */}
                     <ProductBox>
-                      <Image className="rounded-xl" src="https://dummyimage.com/720x600/bababa/000000&text=Picture+of+the+marketplace" width={250} height={250} alt="placeholder"/>
-                    </ProductBox>
-                    <ProductBox>
-                      <p className="text-center text-primary font-semibold">Product Name</p>
-                      <p className="text-center text-primary font-semibold">Product Price</p>
-                      <p className="text-center text-primary font-semibold">Store</p>
-                      <p className="text-center text-primary font-semibold">Nutriscore</p>
-                    </ProductBox>
-                    <ProductBox>
-                      <p className="text-center text-primary font-semibold">Product Name</p>
-                      <p className="text-center text-primary font-semibold">Product Price</p>
-                      <p className="text-center text-primary font-semibold">Store</p>
-                      <p className="text-center text-primary font-semibold">Nutriscore</p>
-                    </ProductBox>
-                    <ProductBox>
-                      <p className="text-center text-primary font-semibold">Product Name</p>
-                      <p className="text-center text-primary font-semibold">Product Price</p>
-                      <p className="text-center text-primary font-semibold">Store</p>
-                      <p className="text-center text-primary font-semibold">Nutriscore</p>
-                    </ProductBox>
-                    <ProductBox>
-                      <p className="text-center text-primary font-semibold">Product Name</p>
-                      <p className="text-center text-primary font-semibold">Product Price</p>
-                      <p className="text-center text-primary font-semibold">Store</p>
-                      <p className="text-center text-primary font-semibold">Nutriscore</p>
-                    </ProductBox>
-                    <ProductBox>
-                      <p className="text-center text-primary font-semibold">Product Name</p>
-                      <p className="text-center text-primary font-semibold">Product Price</p>
-                      <p className="text-center text-primary font-semibold">Store</p>
-                      <p className="text-center text-primary font-semibold">Nutriscore</p>
                     </ProductBox>
 
                     <ProductBox>
-                      <p className="text-center text-primary font-semibold">Product Name</p>
-                      <p className="text-center text-primary font-semibold">Product Price</p>
-                      <p className="text-center text-primary font-semibold">Store</p>
-                      <p className="text-center text-primary font-semibold">Nutriscore</p>
                     </ProductBox>
+
                     <ProductBox>
-                      <p className="text-center text-primary font-semibold">Product Name</p>
-                      <p className="text-center text-primary font-semibold">Product Price</p>
-                      <p className="text-center text-primary font-semibold">Store</p>
-                      <p className="text-center text-primary font-semibold">Nutriscore</p>
                     </ProductBox>
+
                     <ProductBox>
-                      <p className="text-center text-primary font-semibold">Product Name</p>
-                      <p className="text-center text-primary font-semibold">Product Price</p>
-                      <p className="text-center text-primary font-semibold">Store</p>
-                      <p className="text-center text-primary font-semibold">Nutriscore</p>
                     </ProductBox>
+
                     <ProductBox>
-                      <p className="text-center text-primary font-semibold">Product Name</p>
-                      <p className="text-center text-primary font-semibold">Product Price</p>
-                      <p className="text-center text-primary font-semibold">Store</p>
-                      <p className="text-center text-primary font-semibold">Nutriscore</p>
                     </ProductBox>
+
                     <ProductBox>
-                      <p className="text-center text-primary font-semibold">Product Name</p>
-                      <p className="text-center text-primary font-semibold">Product Price</p>
-                      <p className="text-center text-primary font-semibold">Store</p>
-                      <p className="text-center text-primary font-semibold">Nutriscore</p>
                     </ProductBox>
+
                     <ProductBox>
-                      <p className="text-center text-primary font-semibold">Product Name</p>
-                      <p className="text-center text-primary font-semibold">Product Price</p>
-                      <p className="text-center text-primary font-semibold">Store</p>
-                      <p className="text-center text-primary font-semibold">Nutriscore</p>
                     </ProductBox>
+
+                    <ProductBox>
+                    </ProductBox>
+
+                    <ProductBox>
+                    </ProductBox>
+
+                    <ProductBox>
+                    </ProductBox>
+
+                    <ProductBox>
+                    </ProductBox>
+
+                    <ProductBox>
+                    </ProductBox>
+
                   </div>
                 </div>
                 <div className="dealsbox col-start-2 col-span-2 mt-16 pb-4 border-2 border-secondary">
