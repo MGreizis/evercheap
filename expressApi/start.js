@@ -19,7 +19,7 @@ app.use((req, res, next) => {
 
 app.use('/', indexRouter);
 
-app.set('port', process.env.PORT || 3012);
+app.set('port', process.env.PORT || 3010);
 const server = app.listen(app.get('port'), () => {
   console.log(`🍿 Express running → PORT ${server.address().port}`);
 });

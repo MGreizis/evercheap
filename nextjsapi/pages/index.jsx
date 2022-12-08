@@ -3,6 +3,7 @@ import Combobox from "react-widgets/Combobox";
 
 let ComboboxSelectedValue = '';
 
+// button should get the value and know what products to show depending on the selected value
 function setDataFromCombobox(value) {
 	if(value != null)
 	{
@@ -15,13 +16,14 @@ function AlertComboboxValue() {
 	alert(ComboboxSelectedValue);
 }
 
-// napisat 3 endpointy pre ten button teda 3 fetche aj /jumbostore/juboproducts
 export default function Home() {
 	// using use state hook to update the state variable
 	const [error, setError] = useState(null);
 	const [isLoaded, setIsLoaded] = useState(false);
 	const [stores, setShops] = useState([]);
-	const [products, setProducts] = useState([]);
+	const [jumboProducts, setJumboProducts] = useState([]);
+	const [ahProducts, setAhProducts] = useState([]);
+	const [lidlProducts, setLidlProducts] = useState([]);
 	const [shop, setShop] = useState();
 
 	useEffect(() => {
@@ -41,15 +43,35 @@ export default function Home() {
 			)
 	}, [])
 	useEffect(() => {
-		fetch("http://localhost:3012/stores/products")
+		fetch("http://localhost:3013/stores/Jumboproducts")
 			.then(res => res.json())
 			.then(
 				(data) => {
-					setProducts(data);
+					setJumboProducts(data);
 					console.log(data);
 				}
 			)
 	}, [])
+	// useEffect(() => {
+	// 	fetch("http://localhost:3012/stores/ahProducts")
+	// 		.then(res => res.json())
+	// 		.then(
+	// 			(data) => {
+	// 				setAhProducts(data);
+	// 				console.log(data);
+	// 			}
+	// 		)
+	// }, [])
+	// useEffect(() => {
+	// 	fetch("http://localhost:3013/stores/lidlProducts")
+	// 		.then(res => res.json())
+	// 		.then(
+	// 			(data) => {
+	// 				setLidlProducts(data);
+	// 				console.log(data);
+	// 			}
+	// 		)
+	// }, [])
 	
 	if (error) {
 		return <div>Error</div>;
@@ -66,9 +88,8 @@ export default function Home() {
 					value={shop.name} // set selected value
 					onChange={setDataFromCombobox}/>
 <div>
-					
 					<ul>
-						{products.data.map(product => (
+						{jumboProducts.data.map(product => (
 							<li key={product.id}>
 								<div>
 									<h1>{product.name}</h1>
@@ -84,7 +105,4 @@ export default function Home() {
 
 function callStore(name) {
 	console.log("I am here")
-
-
-
 }
