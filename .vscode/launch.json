@@ -1,6 +1,7 @@
 {
     "version": "0.2.0",
     "configurations": [
+
       {
         "name": "Next.js: debug server-side",
         "type": "node-terminal",
@@ -11,7 +12,10 @@
         "name": "Next.js: debug client-side",
         "type": "pwa-chrome",
         "request": "launch",
-        "url": "http://localhost:3001"
+        // "outFiles": ["$C:/Downloads/schoolyear2/evercheap/nextjsapi/pages/*.jsx"],
+        // C:\Downloads\schoolyear2\evercheap\nextjsapi\pages
+        "url": "http://localhost:3000",
+        "webRoot": "${C:/Downloads/schoolyear2/evercheap/nextjsapi/pages}",
       },
       {
         "name": "Next.js: debug full stack",

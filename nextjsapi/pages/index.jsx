@@ -1,10 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import Combobox from "react-widgets/Combobox";
 
-function getData(event) {
-	console.log('testing', event)
+let ComboboxSelectedValue = '';
+
+function setDataFromCombobox(value) {
+	if(value != null)
+	{
+		alert(value)
+		ComboboxSelectedValue = value;
+	}
 }
 
+function AlertComboboxValue() {
+	alert(ComboboxSelectedValue);
+}
+
+// napisat 3 endpointy pre ten button teda 3 fetche aj /jumbostore/juboproducts
 export default function Home() {
 	// using use state hook to update the state variable
 	const [error, setError] = useState(null);
@@ -33,9 +44,9 @@ export default function Home() {
 		fetch("http://localhost:3012/stores/products")
 			.then(res => res.json())
 			.then(
-				(items) => {
-					setProducts(items);
-					console.log(items);
+				(data) => {
+					setProducts(data);
+					console.log(data);
 				}
 			)
 	}, [])
@@ -46,28 +57,18 @@ export default function Home() {
 		return <div>Loading...</div>;
 	} else {
 		return (
-			<><div>
-				<button onClick={getData}>confirm</button>
+			<>
+				<button onClick={AlertComboboxValue}>confirm</button>
 				<Combobox
 					hideCaret
 					hideEmptyPopup
 					data={stores.data.map(store => (store.name))}
 					value={shop.name} // set selected value
-					onChange={getData}
-				/>
-			</div><div>
+					onChange={setDataFromCombobox}/>
+<div>
+					
 					<ul>
-						{stores.data.map(store => (
-							<li key={store.id}>
-								<div>
-									<h1>{store.name}</h1>
-									<h1>{store.id}</h1>
-								</div>
-							</li>
-						))}
-					</ul>
-					<ul>
-						{products.items?.map(product => (
+						{products.data.map(product => (
 							<li key={product.id}>
 								<div>
 									<h1>{product.name}</h1>
