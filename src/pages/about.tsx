@@ -3,7 +3,6 @@ import Footer from "../components/footer";
 import Styles from "../../styles/Home.module.css";
 import Header from "../components/header";
 import BackgroundBlobOrange from "../components/backgroundBlobOrange";
-import BackgroundBlobWhite from "../components/backgroundBlobWhite";
 
 export default function About() {
   return (
@@ -84,7 +83,6 @@ export default function About() {
               </div>
             </div>
           </div>
-          <BackgroundBlobWhite />
         </main>
         <Footer />
       </div>

@@ -22,7 +22,7 @@ export default function Header() {
               className="flex items-center text-primary no-underline hover:no-underline font-bold text-2xl lg:text-4xl"
               href="/"
             >
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-secondary to-tertiary">
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-secondary to-primary">
                 Evercheap
               </span>
             </Link>
@@ -41,7 +41,7 @@ export default function Header() {
           <div className="hidden lg:flex lg:min-w-0 lg:flex-1 lg:justify-end">
             <Link
               href="/login"
-              className="inline-block rounded-lg px-3 py-1.5 text-sm font-semibold bg-secondary leading-6 text-primary shadow-sm ring-1 ring-secondary hover:ring-secondary hover:bg-tertiary"
+              className="inline-block rounded-lg px-3 py-1.5 text-sm font-semibold bg-primary leading-6 text-secondary shadow-sm ring-1 ring-secondary hover:ring-secondary hover:bg-tertiary"
             >
               {!session ? "Log in" : "Account"}
             </Link>
