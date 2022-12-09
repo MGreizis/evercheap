@@ -185,3 +185,45 @@
     filter: invert(1);
   }
 }
+
+.dealsbox {
+  @apply bg-primary
+		text-secondary
+		min-w-full
+    h-[40vh]
+		rounded-xl
+    col-start-2
+    col-span-2 
+    mt-16 
+    pb-4 
+    border-2 
+    border-secondary;
+}
+
+.productbox {
+  @apply bg-primary
+		text-secondary
+		min-w-full
+    h-[80vh]
+		rounded-xl
+    row-end-auto
+    col-start-2 
+    col-span-2 
+    pb-12 
+    border-2 
+    border-secondary 
+    scrollbar-thin;
+}
+
+.shoppingcart {
+  @apply bg-primary
+    text-secondary
+    min-w-full
+    rounded-xl
+    row-span-2 
+    flex 
+    flex-col
+    h-[80.4%]
+    border-2
+    border-secondary;
+}

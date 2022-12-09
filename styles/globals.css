@@ -29,25 +29,3 @@ a {
     background: black;
   }
 }
-
-.dealsbox {
-  @apply bg-primary
-		text-secondary
-		min-w-full
-		rounded;
-}
-
-.productbox {
-  @apply bg-primary
-		text-secondary
-		min-w-full
-    h-[80vh]
-		rounded;
-}
-
-.shoppingcart {
-  @apply bg-primary
-    text-secondary
-    min-w-full
-    rounded;
-}
