@@ -8,46 +8,58 @@ const navigation = [
   { name: "Company", href: "#" },
 ];
 
+import React from "react";
+
 export default function Header() {
   const session = useSession();
+  // const [navbarOpen, setNavbarOpen] = React.useState(false);
   return (
-    <div className="px-6 pt-6 lg:px-8">
       <div>
-        <nav
-          className="flex h-9 items-center justify-between"
-          aria-label="Global"
-        >
+        <nav className="relative flex flex-wrap items-center justify-between px-2 py-3 bg-gray-400">
           <div className="flex lg:min-w-0 lg:flex-1" aria-label="Global">
-            <Link
-              className="flex items-center text-primary no-underline hover:no-underline font-bold text-2xl lg:text-4xl"
-              href="/"
+            <a
+                className="text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase text-white"
+                href="#pablo"
             >
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-secondary to-primary">
-                Evercheap
-              </span>
-            </Link>
+              Evercheap
+            </a>
+            <button
+                className="text-white cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent block lg:hidden outline-none focus:outline-none flex flex-col lg:flex-row list-none lg:ml-auto"
+                type="button"
+                // onClick={() => setNavbarOpen(!navbarOpen)}
+            >
+              <i className="fas fa-bars"></i>
+            </button>
           </div>
           <div className="hidden lg:flex lg:min-w-0 lg:flex-1 lg:justify-center lg:gap-x-12">
             {navigation.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                className="font-semibold text-secondary hover:text-primary"
-              >
-                {item.name}
-              </a>
+                <a
+                    key={item.name}
+                    href={item.href}
+                    className="font-semibold text-secondary hover:text-primary"
+                >
+                  {item.name}
+                </a>
             ))}
           </div>
-          <div className="hidden lg:flex lg:min-w-0 lg:flex-1 lg:justify-end">
+          <div className="hidden lg:flex lg:min-w-0 lg:flex-1 lg:justify-end flex flex-col lg:flex-row list-none lg:ml-auto">
             <Link
-              href="/login"
-              className="inline-block rounded-lg px-3 py-1.5 text-sm font-semibold bg-primary leading-6 text-secondary shadow-sm ring-1 ring-secondary hover:ring-secondary hover:bg-tertiary"
+                href="/login"
+                className="inline-block rounded-lg px-3 py-1.5 text-sm font-semibold bg-white leading-6 text-secondary shadow-sm hover:ring-secondary hover:bg-tertiary"
             >
               {!session ? "Log in" : "Account"}
             </Link>
           </div>
+          {/* <div
+            className={
+              "lg:flex flex-grow items-center" +
+              (navbarOpen ? " flex" : " hidden")
+            }
+            id="example-navbar-danger"
+          ></div> */}
         </nav>
       </div>
-    </div>
   );
 }
+
+

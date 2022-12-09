@@ -69,13 +69,14 @@ export default function Index() {
                   (for now, it's a different page, obviously) */}
                   <Link
                     href="/marketplace/compare"
-                    className="justify-self-center self-center py-2.5 mb-4 mt-auto bg-white w-[90%] text-primary text-center text-middle rounded-lg font-semibold shadow-sm ring-1 ring-secondary hover:ring-secondary hover:text-secondary"
+                    className="
+                    justify-self-center self-center py-2.5 mb-4 mt-auto bg-white w-[90%] text-primary text-center text-middle rounded-lg font-semibold shadow-sm hover:ring-secondary hover:text-secondary"
                   >
                     Compare
                   </Link>
                 </div>
                 <div className={Styles.productbox}>
-                  <div className="h-56 grid grid-cols-3 gap-12 content-start pl-10 pt-6">
+                  <div className="h-56 grid grid-cols-3 gap-12 content-start pl-10 pt-7">
                     {/* <ProductFilters /> */}
                     <ProductBox>
                     </ProductBox>

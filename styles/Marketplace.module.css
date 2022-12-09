@@ -3,15 +3,13 @@
 }
 
 .main {
+  @apply px-2;
   min-height: 100vh;
-  padding: 4rem 0;
+  padding: 2rem 0;
   flex: 1;
   display: flex;
   flex-direction: column;
-  /* justify-content: center;
-  align-items: center; */
-  padding-left: 2rem;
-  padding-right: 2rem;
+  background: #FFFFFF;
 }
 
 .footer {
@@ -28,10 +26,12 @@
   justify-content: center;
   align-items: center;
   flex-grow: 1;
+
+  background: #C9C9C9;
 }
 
 .title a {
-  color: #0070f3;
+  color: #6A6868;
   text-decoration: none;
 }
 
@@ -45,6 +45,7 @@
   margin: 0;
   line-height: 1.15;
   font-size: 4rem;
+  color: #6A6868;
 }
 
 .title,
@@ -113,8 +114,6 @@
 .box {
   width: 270px;
   height: 270px;
-  left: 551.43px;
-  top: 530.83px;
 
   background: #FFFFFF;
   border-radius: 20px;
@@ -130,9 +129,9 @@
   col-span-2
   mt-16
   pb-4
-  border-2
   border-secondary;
   border-radius: 20px;
+  background: #C9C9C9;
 }
 
 .productbox {
@@ -145,10 +144,10 @@
   col-start-2
   col-span-2
   pb-12
-  border-2
   border-secondary
   scrollbar-thin;
   border-radius: 20px;
+  background: #C9C9C9;
 }
 
 .shoppingcart {
@@ -160,9 +159,9 @@
   flex
   flex-col
   h-[80.4%]
-  border-2
   border-secondary;
   border-radius: 20px;
+  background: #C9C9C9;
 }
 
 
@@ -176,10 +175,10 @@
 @media (prefers-color-scheme: dark) {
   .card,
   .footer {
-    border-color: #222;
+    border-color: #C9C9C9;
   }
   .code {
-    background: #111;
+    background: #C9C9C9;
   }
   .logo img {
     filter: invert(1);
