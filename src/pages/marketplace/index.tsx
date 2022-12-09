@@ -23,7 +23,7 @@ export default function Index() {
 
   function ProductBox({ children }: Products) {
     return (
-      <div className="border-2 border-secondary rounded-xl bg-tertiary h-48 w-3/4 my-3">
+      <div className={Styles.box}>
         <p className="text-center text-primary font-semibold">Product Name</p>
         <p className="text-center text-primary font-semibold">Product Price</p>
         <p className="text-center text-primary font-semibold">Store</p>
@@ -63,7 +63,7 @@ export default function Index() {
             <main className={Styles.main}>
             {/* <ProductFilters /> */}
               <div className="grid overflow-hidden grid-cols-3 grid-rows-2 gap-2 h-auto mx-3 pt-8">
-                <div className="shoppingcart row-span-2 flex flex-col h-[100%] border-2 border-secondary">
+                <div className={Styles.shoppingcart}>
                   <h1 className={Styles.title}>Shopping Cart</h1>
                   {/* This can be either a separate page or a modal
                   (for now, it's a different page, obviously) */}
@@ -74,8 +74,8 @@ export default function Index() {
                     Compare
                   </Link>
                 </div>
-                <div className="productbox row-end-auto col-start-2 col-span-2 pb-12 border-2 border-secondary scrollbar-thin scrollbar-thumb-secondary scrollbar-track-primary scrollbar-rounded">
-                  <div className="h-56 grid grid-cols-3 gap-4 content-start pl-10 pt-6">
+                <div className={Styles.productbox}>
+                  <div className="h-56 grid grid-cols-3 gap-12 content-start pl-10 pt-6">
                     {/* <ProductFilters /> */}
                     <ProductBox>
                     </ProductBox>
@@ -115,7 +115,7 @@ export default function Index() {
 
                   </div>
                 </div>
-                <div className="dealsbox col-start-2 col-span-2 mt-16 pb-4 border-2 border-secondary">
+                <div className={Styles.dealsbox}>
                   <h1 className={Styles.title}>Daily / Personalised Deals</h1>
                 </div>
               </div>

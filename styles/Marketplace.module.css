@@ -110,6 +110,62 @@
   margin-left: 0.5rem;
 }
 
+.box {
+  width: 270px;
+  height: 270px;
+  left: 551.43px;
+  top: 530.83px;
+
+  background: #FFFFFF;
+  border-radius: 20px;
+}
+
+.dealsbox {
+  @apply bg-primary
+  text-secondary
+  min-w-full
+  h-[40vh]
+  rounded-xl
+  col-start-2
+  col-span-2
+  mt-16
+  pb-4
+  border-2
+  border-secondary;
+  border-radius: 20px;
+}
+
+.productbox {
+  @apply bg-primary
+  text-secondary
+  min-w-full
+  h-[80vh]
+  rounded-xl
+  row-end-auto
+  col-start-2
+  col-span-2
+  pb-12
+  border-2
+  border-secondary
+  scrollbar-thin;
+  border-radius: 20px;
+}
+
+.shoppingcart {
+  @apply bg-primary
+  text-secondary
+  min-w-full
+  rounded-xl
+  row-span-2
+  flex
+  flex-col
+  h-[80.4%]
+  border-2
+  border-secondary;
+  border-radius: 20px;
+}
+
+
 @media (max-width: 600px) {
   .grid {
     width: 100%;
