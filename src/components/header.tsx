@@ -17,12 +17,12 @@ export default function Header() {
       <div>
         <nav className="relative flex flex-wrap items-center justify-between px-2 py-3 bg-gray-400">
           <div className="flex lg:min-w-0 lg:flex-1" aria-label="Global">
-            <a
+            <Link
                 className="text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase text-white"
                 href="/"
             >
               Evercheap
-            </a>
+            </Link>
             <button
                 className="text-white cursor-pointer text-xl leading-none px-3 py-1 border border-solid border-transparent rounded bg-transparent block lg:hidden outline-none focus:outline-none flex flex-col lg:flex-row list-none lg:ml-auto"
                 type="button"
@@ -33,13 +33,13 @@ export default function Header() {
           </div>
           <div className="hidden lg:flex lg:min-w-0 lg:flex-1 lg:justify-center lg:gap-x-12">
             {navigation.map((item) => (
-                <a
+                <Link
                     key={item.name}
                     href={item.href}
                     className="font-semibold text-secondary hover:text-primary"
                 >
                   {item.name}
-                </a>
+                </Link>
             ))}
           </div>
           <div className="hidden lg:flex lg:min-w-0 lg:flex-1 lg:justify-end flex flex-col lg:flex-row list-none lg:ml-auto">
