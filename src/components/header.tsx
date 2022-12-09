@@ -19,7 +19,7 @@ export default function Header() {
           <div className="flex lg:min-w-0 lg:flex-1" aria-label="Global">
             <a
                 className="text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase text-white"
-                href="#pablo"
+                href="/"
             >
               Evercheap
             </a>
