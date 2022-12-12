@@ -50,13 +50,6 @@ export default function Header() {
               {!session ? "Log in" : "Account"}
             </Link>
           </div>
-          {/* <div
-            className={
-              "lg:flex flex-grow items-center" +
-              (navbarOpen ? " flex" : " hidden")
-            }
-            id="example-navbar-danger"
-          ></div> */}
         </nav>
       </div>
   );

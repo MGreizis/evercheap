@@ -69,7 +69,31 @@ export default function Index() {
                                 </Link>
                             </div>
                             <div className={Styles.productbox}>
-                                <div className="h-56 grid grid-cols-3 gap-12 content-start pl-10 pt-7">
+                                <div className={Styles.gridlayout}>
+                                    <ProductBox>
+                                    </ProductBox>
+
+                                    <ProductBox>
+                                    </ProductBox>
+
+                                    <ProductBox>
+                                    </ProductBox>
+
+                                    <ProductBox>
+                                    </ProductBox>
+
+                                    <ProductBox>
+                                    </ProductBox>
+
+                                    <ProductBox>
+                                    </ProductBox>
+
+                                    <ProductBox>
+                                    </ProductBox>
+
+                                    <ProductBox>
+                                    </ProductBox>
+
                                     <ProductBox>
                                     </ProductBox>
 
