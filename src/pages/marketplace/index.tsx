@@ -56,7 +56,7 @@ export default function Index() {
                 <div className="bg-tertiary isolate">
                     <Header />
                     <main className={Styles.main}>
-                        <div className="grid overflow-hidden grid-cols-3 grid-rows-2 gap-2 h-auto mx-3 pt-8">
+                        <div className={Styles.maingridlayout}>
                             <div className={Styles.shoppingcart}>
                                 <h1 className={Styles.title}>Shopping Cart</h1>
                                 <Link
@@ -109,6 +109,10 @@ export default function Index() {
                             </div>
                             <div className={Styles.dealsbox}>
                                 <h1 className={Styles.title}>Daily / Personalised Deals</h1>
+
+                                <ProductBox>
+                                </ProductBox>
+
                             </div>
                         </div>
                     </main>

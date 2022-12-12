@@ -6,13 +6,11 @@
   padding: 0 2px;
   min-height: 100vh;
   padding-top: 2rem;
-  padding-bottom: 2rem;
   flex: 1;
   display: flex;
   flex-direction: column;
   background: #FFFFFF;
 }
-
 
 .footer {
   display: flex;
@@ -122,17 +120,17 @@
 }
 
 .dealsbox {
-  @apply bg-primary
-  text-secondary
-  min-w-full
-  rounded-xl
-  col-start-2
-  col-span-2
-  mt-16
-  pb-4
-  border-secondary;
-  border-radius: 20px;
   background: #C9C9C9;
+  color: #666666;
+  min-width: 100%;
+  border-radius: 20px;
+  border: 1px solid #666666;
+  grid-column-start: 1;
+  grid-column-end: 4;
+  margin-top: 2px;
+  height: 400px;
+  align-items: center;
+
 }
 
 .productbox {
@@ -148,24 +146,30 @@
   align-items: center;
   grid-column-start: 2;
   grid-column-end: 4;
-  padding-top: 50px;
-  padding-left: 50px;
-  padding-bottom: 50px;
+  padding-top: 30px;
+  padding-left: 30px;
+  padding-bottom: 30px;
 }
-
 
 .shoppingcart {
-  @apply bg-primary
-  text-secondary
-  min-w-full
-  rounded-xl
-  row-span-2
-  flex
-  flex-col
-  border-secondary;
-  border-radius: 20px;
   background: #C9C9C9;
+  color: #666666;
+  min-width: 100%;
+  border-radius: 20px;
+  border: 1px solid #666666;
+  display: flex;
+  flex-direction: column;
 }
+
+.maingridlayout {
+  display: grid;
+  overflow: hidden;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, auto);
+  gap: 20px;
+  margin: 100px;
+}
+
 
 .gridlayout {
   display: grid;
