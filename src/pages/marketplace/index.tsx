@@ -31,6 +31,30 @@ export default function Index() {
         );
     }
 
+    function SecondDailyBox({ children }: ProductProps) {
+        return (
+            <div className={Styles.secondbox}>
+                <p className="text-center text-primary font-semibold">Product Name</p>
+                <p className="text-center text-primary font-semibold">Product Price</p>
+                <p className="text-center text-primary font-semibold">Store</p>
+                <p className="text-center text-primary font-semibold">Nutriscore</p>
+                {children}
+            </div>
+        );
+    }
+
+    function ThirdDailyBox({ children }: ProductProps) {
+        return (
+            <div className={Styles.thirdbox}>
+                <p className="text-center text-primary font-semibold">Product Name</p>
+                <p className="text-center text-primary font-semibold">Product Price</p>
+                <p className="text-center text-primary font-semibold">Store</p>
+                <p className="text-center text-primary font-semibold">Nutriscore</p>
+                {children}
+            </div>
+        );
+    }
+
     async function getProducts() {
         const { data, error } = await supabase
             .from("products")
@@ -108,11 +132,14 @@ export default function Index() {
                                 </div>
                             </div>
                             <div className={Styles.dealsbox}>
-                                <h1 className={Styles.title}>Daily / Personalised Deals</h1>
+                                    <ProductBox>
+                                    </ProductBox>
 
-                                <ProductBox>
-                                </ProductBox>
+                                    <ProductBox>
+                                    </ProductBox>
 
+                                    <ProductBox>
+                                    </ProductBox>
                             </div>
                         </div>
                     </main>

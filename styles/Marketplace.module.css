@@ -127,10 +127,13 @@
   border: 1px solid #666666;
   grid-column-start: 1;
   grid-column-end: 4;
-  margin-top: 2px;
-  height: 400px;
   align-items: center;
-
+  padding: 50px 400px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;  /* 3 equal-width columns */
+  grid-column-gap: 20px;  /* add 20 pixels of space between each column */
+  justify-content: center;  /* center items horizontally within the grid cells */
+  align-items: center;  /* center items vertically within the grid cells */
 }
 
 .productbox {
