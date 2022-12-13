@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
 import Head from "next/head";
 import Header from "../../components/header";
 import Footer from "../../components/footer";
@@ -12,6 +12,20 @@ import { Database } from "../../../utils/database.types";
 type Products = Database["public"]["Tables"]["products"]["Row"];
 
 export default function Index() {
+    const [products, setProducts] = useState([]);
+    const { data } = products;
+
+    useEffect(() => {
+		fetch("http://localhost:3012/stores/products")
+			.then(res => res.json())
+			.then(
+				(data) => {
+					setProducts(data);
+					console.log(data);
+				}
+			)
+	}, [])
+
     const session = useSession();
     const supabase = useSupabaseClient<Database>();
 
@@ -22,6 +36,16 @@ export default function Index() {
     function ProductBox({ children }: ProductProps) {
         return (
             <div className={Styles.box}>
+                <ul>
+					{products.data.map(product => (
+							<li key={product.id}>
+								<div>
+									<h1>{product.name}</h1>
+									<h1>{product.id}</h1>
+								</div>
+							</li>
+						))}
+					</ul>
                 <p className="text-center text-primary font-semibold">Product Name</p>
                 <p className="text-center text-primary font-semibold">Product Price</p>
                 <p className="text-center text-primary font-semibold">Store</p>
@@ -29,41 +53,6 @@ export default function Index() {
                 {children}
             </div>
         );
-    }
-
-    function SecondDailyBox({ children }: ProductProps) {
-        return (
-            <div className={Styles.secondbox}>
-                <p className="text-center text-primary font-semibold">Product Name</p>
-                <p className="text-center text-primary font-semibold">Product Price</p>
-                <p className="text-center text-primary font-semibold">Store</p>
-                <p className="text-center text-primary font-semibold">Nutriscore</p>
-                {children}
-            </div>
-        );
-    }
-
-    function ThirdDailyBox({ children }: ProductProps) {
-        return (
-            <div className={Styles.thirdbox}>
-                <p className="text-center text-primary font-semibold">Product Name</p>
-                <p className="text-center text-primary font-semibold">Product Price</p>
-                <p className="text-center text-primary font-semibold">Store</p>
-                <p className="text-center text-primary font-semibold">Nutriscore</p>
-                {children}
-            </div>
-        );
-    }
-
-    async function getProducts() {
-        const { data, error } = await supabase
-            .from("products")
-            .select("*")
-            .order("id", { ascending: true });
-        if (error) {
-            console.log(error);
-        }
-        console.log(data);
     }
 
     return (
