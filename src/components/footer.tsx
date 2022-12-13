@@ -1,11 +1,11 @@
 export default function Footer() {
   return (
-    <footer aria-label="Site Footer" className="bg-primary">
+    <footer aria-label="Site Footer" className="bg-black">
       <div className="relative mx-auto max-w-screen-xl px-4 py-4 sm:px-6 lg:px-8 lg:pt-24">
         <div className="absolute top-4 right-4 sm:top-6 sm:right-6 lg:top-8 lg:right-8">
           <a
-            className="inline-block rounded-full bg-secondary p-2 text-white shadow transition hover:bg-teal-500 sm:p-3 lg:p-4"
-            href="#MainContent"
+            className="inline-block rounded-full bg-white p-2 text-black shadow transition hover:bg-teal-500 sm:p-3 lg:p-4"
+            href="#"
           >
             <span className="sr-only">Back to top</span>
 
@@ -114,7 +114,9 @@ export default function Footer() {
               </svg>
             </div>
 
-            <p className="mx-auto mt-6 max-w-md text-center leading-relaxed text-secondary lg:text-left">
+            <p className="mx-auto mt-6 max-w-md text-white text-center leading-relaxed text-secondary lg:text-left"
+               style={{ fontFamily: "Outfit" }}
+            >
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Incidunt
               consequuntur amet culpa cum itaque neque.
             </p>
@@ -133,7 +135,7 @@ export default function Footer() {
 
                   <svg
                     className="h-6 w-6"
-                    fill="currentColor"
+                    fill="white"
                     viewBox="0 0 24 24"
                     aria-hidden="true"
                   >
@@ -155,7 +157,7 @@ export default function Footer() {
 
                   <svg
                     className="h-6 w-6"
-                    fill="currentColor"
+                    fill="white"
                     viewBox="0 0 24 24"
                     aria-hidden="true"
                   >
@@ -173,7 +175,7 @@ export default function Footer() {
 
                   <svg
                     className="h-6 w-6"
-                    fill="currentColor"
+                    fill="white"
                     viewBox="0 0 24 24"
                     aria-hidden="true"
                   >
@@ -189,7 +191,9 @@ export default function Footer() {
           </nav>
         </div>
 
-        <p className="mt-12 text-center text-sm text-secondary lg:text-right">
+        <p className="mt-12 text-center text-white text-sm text-secondary lg:text-right"
+           style={{ fontFamily: "Outfit" }}
+        >
           Copyright &copy; 2022. All rights reserved.
         </p>
       </div>

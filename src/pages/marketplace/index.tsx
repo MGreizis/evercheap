@@ -22,34 +22,10 @@ export default function Index() {
     function ProductBox({ children }: ProductProps) {
         return (
             <div className={Styles.box}>
-                <p className="text-center text-primary font-semibold">Product Name</p>
-                <p className="text-center text-primary font-semibold">Product Price</p>
-                <p className="text-center text-primary font-semibold">Store</p>
-                <p className="text-center text-primary font-semibold">Nutriscore</p>
-                {children}
-            </div>
-        );
-    }
-
-    function SecondDailyBox({ children }: ProductProps) {
-        return (
-            <div className={Styles.secondbox}>
-                <p className="text-center text-primary font-semibold">Product Name</p>
-                <p className="text-center text-primary font-semibold">Product Price</p>
-                <p className="text-center text-primary font-semibold">Store</p>
-                <p className="text-center text-primary font-semibold">Nutriscore</p>
-                {children}
-            </div>
-        );
-    }
-
-    function ThirdDailyBox({ children }: ProductProps) {
-        return (
-            <div className={Styles.thirdbox}>
-                <p className="text-center text-primary font-semibold">Product Name</p>
-                <p className="text-center text-primary font-semibold">Product Price</p>
-                <p className="text-center text-primary font-semibold">Store</p>
-                <p className="text-center text-primary font-semibold">Nutriscore</p>
+                <p className={Styles.text}>Product Name</p>
+                <p className={Styles.text}>Product Price</p>
+                <p className={Styles.text}>Store</p>
+                <p className={Styles.text}>Nutriscore</p>
                 {children}
             </div>
         );
@@ -81,13 +57,11 @@ export default function Index() {
                     <Header />
                     <main className={Styles.main}>
                         <div className={Styles.maingridlayout}>
-                            <div className={Styles.shoppingcart}>
-                                <h1 className={Styles.title}>Shopping Cart</h1>
+                            <div className={Styles.grocerylist}>
+                                <h1 className={Styles.title}>Grocery List</h1>
                                 <Link
                                     href="/marketplace/compare"
-                                    className="
-                justify-self-center self-center py-2.5 mb-4 mt-auto bg-white w-[90%] text-primary text-center text-middle rounded-lg font-semibold shadow-sm hover:ring-secondary hover:text-secondary
-                rounded-full px-4 py-2 focus:outline-none focus:shadow-outline"
+                                    className={Styles.button}
                                 >
                                     Compare
                                 </Link>
@@ -132,6 +106,9 @@ export default function Index() {
                                 </div>
                             </div>
                             <div className={Styles.dealsbox}>
+                                <a href="#">
+                                    <svg className="w-12 h-12" color="white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
+                                </a>
                                     <ProductBox>
                                     </ProductBox>
 
@@ -140,6 +117,9 @@ export default function Index() {
 
                                     <ProductBox>
                                     </ProductBox>
+                                <a href="#">
+                                    <svg className="w-12 h-12" color="white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+                                </a>
                             </div>
                         </div>
                     </main>
