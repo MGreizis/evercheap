@@ -13,7 +13,7 @@ type Products = Database["public"]["Tables"]["products"]["Row"];
 
 export default function Index() {
     const [products, setProducts] = useState([]);
-    const { data } = products;
+    // const { data } = products;
 
     useEffect(() => {
 		fetch("http://localhost:3012/stores/products")
