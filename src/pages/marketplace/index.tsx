@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import Header from "../../components/header";
 import Footer from "../../components/footer";
@@ -9,62 +9,63 @@ import Link from "next/link";
 import { useUser, useSupabaseClient, Session } from "@supabase/auth-helpers-react";
 import { Database } from "../../../utils/database.types";
 
+
 type Products = Database["public"]["Tables"]["products"]["Row"];
+type Product = {
+    id:number;
+    name:string;
+
+};
 
 export default function Index() {
     const session = useSession();
-    const supabase = useSupabaseClient<Database>();
+    const supabase = useSupabaseClient<Database>(); 
+
+    const [products, setProducts] = useState<Product[]>([]); 
+    useEffect(() => {  
+        fetch("http://localhost:3010/stores/products")    
+    .then(res => res.json())    
+    .then((data) => {
+        if (Array.isArray(data)){
+            setProducts(data);
+
+        } else {
+            setProducts([]);
+        }
+      })    
+            .catch(() => {      // Handle error      
+                setProducts([]); // Ensure that products is always an array    
+            }); 
+        }, [])
+
+
 
     type ProductProps = {
         children: React.ReactNode;
     }
 
-    function ProductBox({ children }: ProductProps) {
+    function ProductBox({ children }: ProductProps) { 
         return (
-            <div className={Styles.box}>
-                <p className="text-center text-primary font-semibold">Product Name</p>
-                <p className="text-center text-primary font-semibold">Product Price</p>
-                <p className="text-center text-primary font-semibold">Store</p>
-                <p className="text-center text-primary font-semibold">Nutriscore</p>
+        <div className={Styles.box}> 
+        
+        <ul>
+            {console.log(products)}
+             {products.length === 0 || products.includes(null!) || products.includes(undefined!) ? (
+        <li>No products to display</li>
+        ) : (
+            products.map(product => (
+            <li key={product.id}> 
+            <div> 
+                <h1>{product.name}</h1> 
+                <h1>{product.id}</h1> 
+                </div> 
+                </li>)) as JSX.Element[]
+                )} 
+                </ul>
                 {children}
-            </div>
-        );
-    }
-
-    function SecondDailyBox({ children }: ProductProps) {
-        return (
-            <div className={Styles.secondbox}>
-                <p className="text-center text-primary font-semibold">Product Name</p>
-                <p className="text-center text-primary font-semibold">Product Price</p>
-                <p className="text-center text-primary font-semibold">Store</p>
-                <p className="text-center text-primary font-semibold">Nutriscore</p>
-                {children}
-            </div>
-        );
-    }
-
-    function ThirdDailyBox({ children }: ProductProps) {
-        return (
-            <div className={Styles.thirdbox}>
-                <p className="text-center text-primary font-semibold">Product Name</p>
-                <p className="text-center text-primary font-semibold">Product Price</p>
-                <p className="text-center text-primary font-semibold">Store</p>
-                <p className="text-center text-primary font-semibold">Nutriscore</p>
-                {children}
-            </div>
-        );
-    }
-
-    async function getProducts() {
-        const { data, error } = await supabase
-            .from("products")
-            .select("*")
-            .order("id", { ascending: true });
-        if (error) {
-            console.log(error);
-        }
-        console.log(data);
-    }
+                </div>
+                ); 
+                }
 
     return (
         <>
@@ -132,14 +133,14 @@ export default function Index() {
                                 </div>
                             </div>
                             <div className={Styles.dealsbox}>
-                                    <ProductBox>
-                                    </ProductBox>
+                                <ProductBox>
+                                </ProductBox>
 
-                                    <ProductBox>
-                                    </ProductBox>
+                                <ProductBox>
+                                </ProductBox>
 
-                                    <ProductBox>
-                                    </ProductBox>
+                                <ProductBox>
+                                </ProductBox>
                             </div>
                         </div>
                     </main>

@@ -75,9 +75,9 @@
   dependencies:
     "glob" "7.1.7"
 
-"@next/swc-darwin-arm64@13.0.3":
-  "integrity" "sha512-wV6j6SZ1bc/YHOLCLk9JVqaZTCCey6HBV7inl2DriHsHqIcO6F3+QiYf0KXwRP9BE0GSZZrYd5mZQm2JPTHdJA=="
-  "resolved" "https://registry.npmjs.org/@next/swc-darwin-arm64/-/swc-darwin-arm64-13.0.3.tgz"
+"@next/swc-win32-x64-msvc@13.0.3":
+  "integrity" "sha512-IAptmSqA7k4tQzaw2NAkoEjj3+Dz9ceuvlEHwYh770MMDL4V0ku2m+UHrmn5HUCEDHhgwwjg2nyf6728q2jr1w=="
+  "resolved" "https://registry.npmjs.org/@next/swc-win32-x64-msvc/-/swc-win32-x64-msvc-13.0.3.tgz"
   "version" "13.0.3"
 
 "@nodelib/fs.scandir@2.1.5":
@@ -156,10 +156,10 @@
   dependencies:
     "cross-fetch" "^3.1.5"
 
-"@supabase/gotrue-js@^2.3.0":
-  "integrity" "sha512-e50w8LkfbxtI2SJxUbuQNM7pN+Yu3HYkvCLsidwBgivTdcoFOkhFodwLvWSVdeaxY1mH6Gm66RiKeUMn1+BAow=="
-  "resolved" "https://registry.npmjs.org/@supabase/gotrue-js/-/gotrue-js-2.3.0.tgz"
-  "version" "2.3.0"
+"@supabase/gotrue-js@^2.5.0":
+  "integrity" "sha512-Aw5/WL0+JVjQjX2ZOQvOzoquMg1IMa4l1cA0eHVseAjujgUPpztjdhDwy3xP/c7OQsF+RK0ARxjsmIm2iaILlg=="
+  "resolved" "https://registry.npmjs.org/@supabase/gotrue-js/-/gotrue-js-2.5.0.tgz"
+  "version" "2.5.0"
   dependencies:
     "cross-fetch" "^3.1.5"
 
@@ -185,13 +185,13 @@
   dependencies:
     "cross-fetch" "^3.1.5"
 
-"@supabase/supabase-js@^2.0.4", "@supabase/supabase-js@^2.1.0":
-  "integrity" "sha512-hODrAUDSC6RV6EhwuSMyhaQCF32gij0EBTceuDR+8suJsg7XcyUG0fYgeYecWIvt0nz61xAMY6E+Ywb0tJaAng=="
-  "resolved" "https://registry.npmjs.org/@supabase/supabase-js/-/supabase-js-2.1.0.tgz"
-  "version" "2.1.0"
+"@supabase/supabase-js@^2.0.4", "@supabase/supabase-js@^2.1.4":
+  "integrity" "sha512-i+BAiE472hMIIz6/nM5Pt/6riljjQYJrReyd0LsYsNtis4vcey7SuMX7sYiG9kMo4ivPlB1odYSOJnRbNyqRbQ=="
+  "resolved" "https://registry.npmjs.org/@supabase/supabase-js/-/supabase-js-2.1.4.tgz"
+  "version" "2.1.4"
   dependencies:
     "@supabase/functions-js" "^2.0.0"
-    "@supabase/gotrue-js" "^2.3.0"
+    "@supabase/gotrue-js" "^2.5.0"
     "@supabase/postgrest-js" "^1.1.0"
     "@supabase/realtime-js" "^2.1.0"
     "@supabase/storage-js" "^2.0.0"
@@ -1258,11 +1258,6 @@
   "integrity" "sha512-OO0pH2lK6a0hZnAdau5ItzHPI6pUlvI7jMVnxUQRtw4owF2wk8lOSabtGDCTP4Ggrg2MbGnWO9X8K1t4+fGMDw=="
   "resolved" "https://registry.npmjs.org/fs.realpath/-/fs.realpath-1.0.0.tgz"
   "version" "1.0.0"
-
-"fsevents@^2.3.2", "fsevents@~2.3.2":
-  "integrity" "sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA=="
-  "resolved" "https://registry.npmjs.org/fsevents/-/fsevents-2.3.2.tgz"
-  "version" "2.3.2"
 
 "function-bind@^1.1.1":
   "integrity" "sha512-yIovAzMX49sF8Yl58fSCWJ5svSLuaibPxXQJFLmBObTuCr0Mf1KiPopGM9NiFjiYBCbfaa2Fh6breQ6ANVTI0A=="
