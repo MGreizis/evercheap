@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import Header from "../../components/header";
@@ -18,6 +19,7 @@ type Product = {
 };
 
 export default function Index() {
+
     const session = useSession();
     const supabase = useSupabaseClient<Database>(); 
 
@@ -66,7 +68,6 @@ export default function Index() {
                 </div>
                 ); 
                 }
-
     return (
         <>
             <Head>
