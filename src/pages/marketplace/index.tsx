@@ -14,28 +14,30 @@ type Product = {
     id:number;
     name:string;
     deal: boolean;
-
 };
 
 export default function Index() {
     const session = useSession();
     const supabase = useSupabaseClient<Database>(); 
-
+    // hook for all products
     const [products, setProducts] = useState<Product[]>([]); 
+
+    // fetch for the general products api 
+    // TODO: refactor this fetch to a separate file
     useEffect(() => {  
         fetch("http://localhost:3010/stores/products")    
     .then(res => res.json())    
     .then((result) => {
-
         setProducts(result.data);
       })
         }, [])
 
-
     type ProductProps = {
         children: React.ReactNode;
     }
-    // 
+
+    // loops through products array and shows productbox for each product
+    // the product box is a classname here
     function ProductBoxes({ children }: ProductProps) { 
         return (
             <>
@@ -49,6 +51,25 @@ export default function Index() {
             </> 
         ); 
     }
+
+    function DealBoxes({ children }: ProductProps) { 
+        return (
+                  <>
+                    {
+                      products.map(product => {
+                        if (!product.deal) { 
+                          return (
+                            <div  className={Styles.box} key={product.id}> 
+                              <h1>{product.name}</h1> 
+                              <h1>{product.id}</h1> 
+                            </div>
+                          );
+                        }
+                      }) as JSX.Element[]
+                    }
+                  </> 
+                ); 
+              }
 
     return (
         <>
@@ -79,13 +100,12 @@ export default function Index() {
                             <div className={Styles.productbox}>
                                 <div className={Styles.gridlayout}> 
                                 <ProductBoxes>
-                                </ProductBoxes>                   
-                                    
+                                </ProductBoxes>
                                 </div>
                             </div>
                             <div className={Styles.dealsbox}>
-                                <ProductBoxes>
-                                </ProductBoxes>
+                                <DealBoxes>
+                                </DealBoxes>
                             </div>
                         </div>
                     </main>
