@@ -28,24 +28,14 @@ export default function Index() {
     .then((result) => {
 
         setProducts(result.data);
-        // if (Array.isArray(data)){
-        //     setProducts(data);
-
-        // } else {
-        //     setProducts([]);
-        // }
-      })    
-        .catch(() => {      // Handle error      
-        setProducts([]); // Ensure that products is always an array    
-        }); 
+      })
         }, [])
 
 
     type ProductProps = {
         children: React.ReactNode;
     }
-
-
+    // 
     function ProductBoxes({ children }: ProductProps) { 
         return (
             <>
