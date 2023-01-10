@@ -114,7 +114,7 @@
 .box {
   width: 270px;
   height: 270px;
-
+  margin-bottom: 20px;
   background: #FFFFFF;
   border-radius: 20px;
 }
