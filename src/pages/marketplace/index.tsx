@@ -8,6 +8,7 @@ import Login from "../login";
 import Link from "next/link";
 import { useUser, useSupabaseClient, Session } from "@supabase/auth-helpers-react";
 import { Database } from "../../../utils/database.types";
+import Checkbox from "../../components/checkbox";
 
 type Products = Database["public"]["Tables"]["products"]["Row"];
 type Product = {
@@ -19,6 +20,10 @@ type Product = {
 export default function Index() {
   const session = useSession();
   const supabase = useSupabaseClient<Database>();
+  // checkbox
+  const [isChecked, setIsChecked] = useState(false)
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setIsChecked(event.target.checked)}
   // hook for all products
   const [products, setProducts] = useState<Product[]>([]);
 
@@ -85,6 +90,7 @@ export default function Index() {
       ) : (
         <div className="bg-tertiary isolate">
           <Header />
+          <Checkbox label="My Checkbox" isChecked={isChecked} onChange={handleChange} />
           <main className={Styles.main}>
             <div className={Styles.maingridlayout}>
               <div className={Styles.shoppingcart}>
