@@ -37,7 +37,7 @@ export default function Header() {
                 <Link
                     key={item.name}
                     href={item.href}
-                    className="text hover:text-primary"
+                    className="text text-tertiary hover:text-primary"
                     style={{ fontFamily: "Outfit" }}
                 >
                   {item.name}
