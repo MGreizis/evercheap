@@ -137,6 +137,7 @@
 }
 
 .productbox {
+  @apply scrollbar-thin scrollbar-thumb-secondary;
   background: #C9C9C9;
   color: #666666;
   min-width: 100%;

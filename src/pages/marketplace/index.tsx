@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Head from "next/head";
 import Header from "../../components/header";
 import Footer from "../../components/footer";
@@ -72,6 +72,73 @@ export default function Index() {
     );
   }
 
+  const SearchForm = () => {
+    const [searchTerm, setSearchTerm] = useState('');
+    const [products, setProducts] = useState([]);
+  
+    useEffect(() => {
+      fetch("http://localhost:3010/stores/products")
+        .then((res) => res.json())
+        .then((result) => {
+          setProducts(result.data);
+        });
+    }, []);
+  
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+    };
+  
+    const filteredProducts = products.filter(product => 
+      searchTerm.length >= 2 && product.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  
+    return (
+      <div className="flex justify-center items-center">
+        <form
+          onSubmit={handleSubmit}
+          className="w-1/3 text-center p-4 rounded-md"
+        >
+          <input
+            type="search"
+            className="bg-white focus:outline-none focus:shadow-outline-blue border border-secondary rounded-md py-2 px-4 block w-full appearance-none leading-normal"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            placeholder="Search products..."
+          />
+          {/* <button className="bg-primary hover:bg-secondary text-white font-bold py-2 px-4 rounded-md ml-auto">
+            Search
+          </button> */}
+          <ul>
+            {filteredProducts.length !== 0 || searchTerm.length < 2 ? (
+              filteredProducts.map((result) => (
+                <Link href={`/products/${result.id}`} key={result.id}>
+                  <li
+                    className="search-result"
+                    onMouseEnter={() => {
+                      document
+                        .querySelector(`.search-result[data-id="${result.id}"]`)
+                        ?.classList.add("hovered");
+                    }}
+                    onMouseLeave={() => {
+                      document
+                        .querySelector(`.search-result[data-id="${result.id}"]`)
+                        ?.classList.remove("hovered");
+                    }}
+                    data-id={result.id}
+                  >
+                    {result.name}
+                  </li>
+                </Link>
+              ))
+            ) : (
+              <li>Enter 2 or more characters to see results</li>
+            )}
+          </ul>
+        </form>
+      </div>
+    );
+  };
+
   return (
     <>
       <Head>
@@ -86,6 +153,7 @@ export default function Index() {
         <div className="bg-tertiary isolate">
           <Header />
           <main className={Styles.main}>
+            <SearchForm />
             <div className={Styles.maingridlayout}>
               <div className={Styles.shoppingcart}>
                 <h1 className={Styles.title}>Shopping Cart</h1>
