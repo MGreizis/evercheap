@@ -8,7 +8,7 @@ import Login from "../login";
 import Link from "next/link";
 import { useUser, useSupabaseClient, Session } from "@supabase/auth-helpers-react";
 import { Database } from "../../../utils/database.types";
-import Checkbox from "../../components/checkbox";
+// import Checkbox from "../../components/checkbox";
 
 type Products = Database["public"]["Tables"]["products"]["Row"];
 type Product = {
@@ -16,17 +16,19 @@ type Product = {
   name: string;
   deal: boolean;
 };
-
+interface CheckboxProps {
+  checked: boolean;
+  label: string;
+  name: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+};
 export default function Index() {
   const session = useSession();
   const supabase = useSupabaseClient<Database>();
-  // checkbox
-  const [isChecked, setIsChecked] = useState(false)
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setIsChecked(event.target.checked)}
+
   // hook for all products
   const [products, setProducts] = useState<Product[]>([]);
-
+  
   // fetch for the general products api
   // TODO: refactor this fetch to a separate file
   useEffect(() => {
@@ -76,6 +78,18 @@ export default function Index() {
       </>
     );
   }
+    // checkbox
+    const [isChecked, setIsChecked] = useState(false)
+    const [productType, setProductType] = React.useState<CheckboxProps[]>([]);
+
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+      event.preventDefault();
+      setIsChecked(event.target.checked);
+    };
+
+    const checkedProducts = products.filter(product => 
+      products.length
+    );
 
   return (
     <>
