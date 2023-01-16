@@ -83,8 +83,8 @@ export default function Index() {
                 addShoppingCar(product);
               }}
             >
-              <h1 className="m-1">{product.name}</h1>
-              <img class="h-[80%] w-[85%]" src={product.imageurl} alt="product"/>
+              <h1 className="m-1 flex justify-center">{product.name}</h1>
+              <img className="h-[80%] w-[85%]" src={product.imageurl} alt="product"/>
             </div>
           )) as JSX.Element[]
         }
@@ -106,7 +106,7 @@ export default function Index() {
                 onClick={() => {
                   addShoppingCar(product);
                 }}>
-                  <h1 className="m-1">{product.name}</h1>
+                  <h1 className="flex justify-center m-1">{product.name}</h1>
                   <img class="h-[80%] w-[85%]" src={product.imageurl} alt="product"/>
                 </div>
               );
