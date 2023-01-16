@@ -71,10 +71,11 @@ export default function Index() {
   // loops through products array and shows productbox for each product
   // the product box is a classname here
   function ProductBoxes({ children }: ProductProps) {
+    const limitedProducts = products.slice(3, 15);
     return (
       <>
         {
-          products.map((product) => (
+          limitedProducts.map((product) => (
             <div
               className={Styles.box}
               key={product.id}
