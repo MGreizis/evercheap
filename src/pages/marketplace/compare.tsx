@@ -5,6 +5,8 @@ import Footer from "../../components/footer";
 import Styles from "../../../styles/Home.module.css";
 import CompareStyles from "../../../styles/Compare.module.css";
 import Swipe, { Switem } from '../../components/Swipe';
+import Link from "next/link";
+
 type Product = {
   id: number;
   name: string;
@@ -111,7 +113,7 @@ export default function Compare() {
       <div className="bg-tertiary isolate">
         <Header />
         <main className={`${Styles.main} ${CompareStyles["compare-page-box"]}`}>
-          <div className={CompareStyles["compare-page-exit"]}>Exit</div>
+          <Link href="/marketplace"><div className={CompareStyles["compare-page-exit"]}>Exit</div></Link>
           <div className={CompareStyles["compare-page-wrap"]}>{CompareDom}</div>
           <div className={CompareStyles["compare-other-goods"]}>
             <Swipe swipeData={swipe} currentIndex={currentIndex} leftArrowClick={leftArrowClick} rightArrowClick={rightArrowClick} />
