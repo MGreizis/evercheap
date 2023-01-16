@@ -28,11 +28,13 @@
   flex-grow: 1;
 
   background: #C9C9C9;
+  font-family: "Outfit", sans-serif;
 }
 
 .title a {
-  color: #6A6868;
+  color: #282828;
   text-decoration: none;
+  font-family: "Outfit", sans-serif;
 }
 
 .title a:hover,
@@ -45,18 +47,21 @@
   margin: 0;
   line-height: 1.15;
   font-size: 4rem;
-  color: #6A6868;
+  color: #282828;
+  font-family: "Outfit", sans-serif;
 }
 
 .title,
 .description {
   text-align: center;
+  font-family: "Outfit", sans-serif;
 }
 
 .description {
   margin: 4rem 0;
   line-height: 1.5;
   font-size: 1.5rem;
+  font-family: "Outfit", sans-serif;
 }
 
 .code {
@@ -86,6 +91,7 @@
   border-radius: 10px;
   transition: color 0.15s ease, border-color 0.15s ease;
   max-width: 300px;
+  font-family: "Outfit", sans-serif;
 }
 
 .card:hover,
@@ -98,12 +104,14 @@
 .card h2 {
   margin: 0 0 1rem 0;
   font-size: 1.5rem;
+  font-family: "Outfit", sans-serif;
 }
 
 .card p {
   margin: 0;
   font-size: 1.25rem;
   line-height: 1.5;
+  font-family: "Outfit", sans-serif;
 }
 
 .logo {
@@ -119,24 +127,43 @@
   border-radius: 20px;
 }
 
+.text {
+  font-family: "Outfit", sans-serif;
+  text-align: center;
+}
+
+.svg {
+  w-6:h-6;  /* set the width and height of the icons */
+  grid-column: 1 / 2;  /* occupy the first grid column */
+}
+
 .dealsbox {
-  background: #C9C9C9;
+  display: grid;
+
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-column-gap: 50px;
+
+  justify-content: center;
+  align-items: center;
+
+  grid-column-start: 1;
+  grid-column-end: 4;
+
+  background: #282828;
   color: #666666;
   min-width: 100%;
   border-radius: 20px;
   border: 1px solid #666666;
-  grid-column-start: 1;
-  grid-column-end: 4;
-  align-items: center;
   padding: 50px 400px;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;  /* 3 equal-width columns */
-  grid-column-gap: 20px;  /* add 20 pixels of space between each column */
-  justify-content: center;  /* center items horizontally within the grid cells */
-  align-items: center;  /* center items vertically within the grid cells */
 }
 
 .productbox {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  grid-column-start: 2;
+  grid-column-end: 4;
+  background: #282828;
   @apply scrollbar-thin scrollbar-thumb-secondary;
   background: #C9C9C9;
   color: #666666;
@@ -146,40 +173,59 @@
   border: 1px solid #666666;
   scrollbar-width: thin;
   overflow-y: scroll;
-  display: grid;
-  align-items: center;
-  grid-column-start: 2;
-  grid-column-end: 4;
-  padding-top: 30px;
-  padding-left: 30px;
-  padding-bottom: 30px;
+
+  padding-top: 50px;
+  padding-bottom: 50px;
 }
 
-.shoppingcart {
-  background: #C9C9C9;
+.grocerylist {
+  display: flex;
+  flex-direction: column;
+
+  background: #FFFFFF;
   color: #666666;
   min-width: 100%;
   border-radius: 20px;
   border: 1px solid #666666;
-  display: flex;
-  flex-direction: column;
 }
 
 .maingridlayout {
   display: grid;
-  overflow: hidden;
+
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(2, auto);
   gap: 20px;
+
+  overflow: hidden;
   margin: 100px;
 }
 
-
 .gridlayout {
   display: grid;
+
   grid-template-columns: 1fr 1fr 1fr;
-  gap: 30px;
+  gap: 50px;
+
   align-content: start;
+}
+
+.button {
+   justify-self: center;
+   align-self: center;
+   margin-bottom: 1rem;
+   margin-top: auto;
+   background-color: #282828;
+   width: 90%;
+   color: #FFFFFF;
+   line-height: 40px;
+   font-weight: 600;
+   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+   transition: all 0.15s ease-in-out;
+   outline: none;
+   border-radius: 60px;
+   height: 40px;
+   font-family: "Outfit", sans-serif;
+   text-align: center;
 }
 
 @media (max-width: 600px) {

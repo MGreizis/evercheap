@@ -15,11 +15,12 @@ export default function Header() {
   // const [navbarOpen, setNavbarOpen] = React.useState(false);
   return (
       <div>
-        <nav className="relative flex flex-wrap items-center justify-between px-2 py-3 bg-gray-400">
+        <nav className="relative flex flex-wrap items-center justify-between px-2 py-3 bg-black">
           <div className="flex lg:min-w-0 lg:flex-1" aria-label="Global">
             <Link
                 className="text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase text-white"
                 href="/"
+                style={{ fontFamily: "Outfit" }}
             >
               Evercheap
             </Link>
@@ -36,7 +37,8 @@ export default function Header() {
                 <Link
                     key={item.name}
                     href={item.href}
-                    className="font-semibold text-secondary hover:text-primary"
+                    className="text text-tertiary hover:text-primary"
+                    style={{ fontFamily: "Outfit" }}
                 >
                   {item.name}
                 </Link>
@@ -46,6 +48,7 @@ export default function Header() {
             <Link
                 href="/login"
                 className="inline-block rounded-lg px-3 py-1.5 text-sm font-semibold bg-white leading-6 text-secondary shadow-sm hover:ring-secondary hover:bg-tertiary"
+                style={{ fontFamily: "Outfit" }}
             >
               {!session ? "Log in" : "Account"}
             </Link>
