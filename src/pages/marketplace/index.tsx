@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Head from "next/head";
 import { useRouter } from 'next/router'
 import Header from "../../components/header";
@@ -161,7 +161,6 @@ export default function Index() {
       </div>
     );
   };
-
 
   return (
     <>
