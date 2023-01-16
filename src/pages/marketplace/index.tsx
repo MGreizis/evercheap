@@ -28,6 +28,71 @@ export default function Index() {
   const supabase = useSupabaseClient<Database>();
   const [products, setProducts] = useState<Product[]>([]);
 
+  // fetch for the general products api
+
+  // TODO: refactor this fetch to a separate file
+
+  useEffect(() => {
+    fetch("http://localhost:3010/stores/products")
+      .then((res) => res.json())
+      .then((result) => {
+        setProducts(result.data);
+      });
+  }, []);
+
+  type ProductProps = {
+    children: React.ReactNode;
+  };
+
+  // loops through products array and shows productbox for each product
+  // the product box is a classname here
+  function ProductBoxes({ children }: ProductProps) {
+    return (
+      <>
+        {
+          products.map((product) => (
+            <div className={Styles.box} key={product.id}>
+              <h1>{product.name}</h1>
+              <h1>{product.id}</h1>
+            </div>
+          )) as JSX.Element[]
+        }
+      </>
+    );
+  }
+
+  function DealBoxes({ children }: ProductProps) {
+    const limitedProducts = products.slice(0, 3);
+
+    return (
+      <>
+        {
+          limitedProducts.map((product) => {
+            if (!product.deal) {
+              return (
+                <div className={Styles.box} key={product.id}>
+                  <h1>{product.name}</h1>
+                  <h1>{product.id}</h1>
+                </div>
+              );
+            }
+          }) as JSX.Element[]
+        }
+      </>
+    );
+  }
+
+  async function getProducts() {
+    const { data, error } = await supabase
+      .from("products")
+      .select("*")
+      .order("id", { ascending: true });
+    if (error) {
+      console.log(error);
+    }
+    console.log(data);
+  }
+
   const SearchForm = () => {
     const [searchTerm, setSearchTerm] = useState("");
 
@@ -94,71 +159,6 @@ export default function Index() {
       </div>
     );
   };
-
-  // fetch for the general products api
-
-  // TODO: refactor this fetch to a separate file
-
-  useEffect(() => {
-    fetch("http://localhost:3010/stores/products")
-      .then((res) => res.json())
-      .then((result) => {
-        setProducts(result.data);
-      });
-  }, []);
-
-  type ProductProps = {
-    children: React.ReactNode;
-  };
-
-  // loops through products array and shows productbox for each product
-  // the product box is a classname here
-  function ProductBoxes({ children }: ProductProps) {
-    return (
-      <>
-        {
-          products.map((product) => (
-            <div className={Styles.box} key={product.id}>
-              <h1>{product.name}</h1>
-              <h1>{product.id}</h1>
-            </div>
-          )) as JSX.Element[]
-        }
-      </>
-    );
-  }
-
-  function DealBoxes({ children }: ProductProps) {
-    const limitedProducts = products.slice(0, 3);
-
-    return (
-      <>
-        {
-          limitedProducts.map((product) => {
-            if (!product.deal) {
-              return (
-                <div className={Styles.box} key={product.id}>
-                  <h1>{product.name}</h1>
-                  <h1>{product.id}</h1>
-                </div>
-              );
-            }
-          }) as JSX.Element[]
-        }
-      </>
-    );
-  }
-
-  async function getProducts() {
-    const { data, error } = await supabase
-      .from("products")
-      .select("*")
-      .order("id", { ascending: true });
-    if (error) {
-      console.log(error);
-    }
-    console.log(data);
-  }
 
   return (
     <>
