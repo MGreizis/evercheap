@@ -84,6 +84,7 @@ export default function Index() {
             >
               <h1 className="m-1">{product.name}</h1>
               <h1 className="m-1">{product.id}</h1>
+              <img src={product.imageurl} alt="product"/>
             </div>
           )) as JSX.Element[]
         }
