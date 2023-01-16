@@ -4,7 +4,7 @@ import Header from "../../components/header";
 import Footer from "../../components/footer";
 import Styles from "../../../styles/Home.module.css";
 import CompareStyles from "../../../styles/Compare.module.css";
-import Swipe, { Switem } from '../../components/Swipe';
+import Swipe, { Switem } from "../../components/Swipe";
 import Link from "next/link";
 
 type Product = {
@@ -69,16 +69,26 @@ export default function Compare() {
         <div className={CompareStyles["goods-desc-box"]}>
           {item.goods.map((descItem, descIndex) => (
             <div
-              className={CompareStyles["goods-desc"]}
+            className="border-b-2 border-[#FFFFFF] rounded-tl-lg rounded-tr-lg p-2 flex justify-between items-center max-w-[95%]"
               key={`descKey${descIndex}`}
             >
-              <div className={CompareStyles["goods-desc-key"]}>{descItem.name}</div>
+              <Link href={`/products/${descItem.id}`} key={descItem.id} className={CompareStyles["goods-desc-key"]}>
+                - {descItem.name}
+              </Link>
               <div>1x</div>
             </div>
           ))}
         </div>
       </div>
-      <div className={CompareStyles["goods-price"]} style={{ color: item.isLow ? "#ff7676" : "white", backgroundColor: item.isLow ? "rgb(59 130 246 / 0.5)" : "#777575" }}>€{item.allPrice}</div>
+      <div
+        className={CompareStyles["goods-price"]}
+        style={{
+          color: item.isLow ? "#ff7676" : "white",
+          backgroundColor: item.isLow ? "rgb(59 130 246 / 0.5)" : "#777575",
+        }}
+      >
+        €{item.allPrice}
+      </div>
     </div>
   ));
   const leftArrowClick = () => {
@@ -96,12 +106,23 @@ export default function Compare() {
     }
   };
   React.useEffect(() => {
-    const allStoreData = [{storeName:"ALBERT HEIJN",goods:[],allPrice:11.70},{storeName:"JUMBO",goods:[],allPrice:9.75},{storeName:"LOCAL SHOP",goods:[],allPrice:9.38}];
-    const shoppingData = JSON.parse(window.localStorage.getItem(SHAPPING_CAR_KEY) || "[]") ||[];
-    let minPrice = Math.min.apply(null, allStoreData.map((item) => item.allPrice));
-    let useData = allStoreData.map((item) => ({ ...item, isLow: item.allPrice === minPrice }));
-    setCompareGoods(useData.map((item)=>({...item,goods:shoppingData})));
-  }, [])
+    const allStoreData = [
+      { storeName: "ALBERT HEIJN", goods: [], allPrice: 11.7 },
+      { storeName: "JUMBO", goods: [], allPrice: 9.75 },
+      { storeName: "LOCAL SHOP", goods: [], allPrice: 9.38 },
+    ];
+    const shoppingData =
+      JSON.parse(window.localStorage.getItem(SHAPPING_CAR_KEY) || "[]") || [];
+    let minPrice = Math.min.apply(
+      null,
+      allStoreData.map((item) => item.allPrice)
+    );
+    let useData = allStoreData.map((item) => ({
+      ...item,
+      isLow: item.allPrice === minPrice,
+    }));
+    setCompareGoods(useData.map((item) => ({ ...item, goods: shoppingData })));
+  }, []);
   return (
     <>
       <Head>
@@ -113,10 +134,17 @@ export default function Compare() {
       <div className="bg-tertiary isolate">
         <Header />
         <main className={`${Styles.main} ${CompareStyles["compare-page-box"]}`}>
-          <Link href="/marketplace"><div className={CompareStyles["compare-page-exit"]}>Exit</div></Link>
+          <Link href="/marketplace">
+            <div className={CompareStyles["compare-page-exit"]}>Exit</div>
+          </Link>
           <div className={CompareStyles["compare-page-wrap"]}>{CompareDom}</div>
           <div className={CompareStyles["compare-other-goods"]}>
-            <Swipe swipeData={swipe} currentIndex={currentIndex} leftArrowClick={leftArrowClick} rightArrowClick={rightArrowClick} />
+            <Swipe
+              swipeData={swipe}
+              currentIndex={currentIndex}
+              leftArrowClick={leftArrowClick}
+              rightArrowClick={rightArrowClick}
+            />
           </div>
         </main>
         <Footer />

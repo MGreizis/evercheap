@@ -1,17 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
-import { useRouter } from 'next/router'
+import { useRouter } from "next/router";
 import Header from "../../components/header";
 import Footer from "../../components/footer";
 import Styles from "../../../styles/Marketplace.module.css";
 import { useSession } from "@supabase/auth-helpers-react";
 import Login from "../login";
 import Link from "next/link";
-import {
-  useUser,
-  useSupabaseClient,
-  Session,
-} from "@supabase/auth-helpers-react";
+import { useUser, useSupabaseClient, Session } from "@supabase/auth-helpers-react";
 import { Database } from "../../../utils/database.types";
 
 type Products = Database["public"]["Tables"]["products"]["Row"];
@@ -19,21 +15,13 @@ type Product = {
   id: number;
   name: string;
   deal: boolean;
+  imageurl: string;
 };
-
-export default function Index() {
-  const session = useSession();
-  const supabase = useSupabaseClient<Database>();
-  const [products, setProducts] = useState<Product[]>([]);
-
-  // fetch for the general products api
-
-  // TODO: refactor this fetch to a separate file
 
 const SHAPPING_CAR_KEY = "SHAPPING_CAR_KEY";
 export default function Index() {
   const session = useSession();
-  
+
   const supabase = useSupabaseClient<Database>();
   // hook for all products
   const [products, setProducts] = useState<Product[]>([]);
@@ -49,31 +37,36 @@ export default function Index() {
       .then((result) => {
         setProducts(result.data);
       });
-      setShoppingCar(JSON.parse(window.localStorage.getItem(SHAPPING_CAR_KEY))||[])
+    // setShoppingCar(
+    //   JSON.parse(window.localStorage.getItem(SHAPPING_CAR_KEY)) || []
+    // );
   }, []);
 
   type ProductProps = {
     children: React.ReactNode;
   };
 
-  const addShoppingCar = (product:Product) => {
-    if(!shoppingCar.find((item) => item.id === product.id)){
-      setShoppingCar([...shoppingCar,product]);
-    }else{
+  const addShoppingCar = (product: Product) => {
+    if (!shoppingCar.find((item) => item.id === product.id)) {
+      setShoppingCar([...shoppingCar, product]);
+    } else {
       window.alert("Exists");
     }
-  }
+  };
   const toCompareHandler = () => {
-    const addLocaShoppingCar = (newCarData:Product[]) => {
-      window.localStorage.setItem("SHAPPING_CAR_KEY", JSON.stringify(Object.values(newCarData)));
-    }
-    if(shoppingCar.length > 0) {
+    const addLocaShoppingCar = (newCarData: Product[]) => {
+      window.localStorage.setItem(
+        "SHAPPING_CAR_KEY",
+        JSON.stringify(Object.values(newCarData))
+      );
+    };
+    if (shoppingCar.length > 0) {
       addLocaShoppingCar(shoppingCar);
       router.push("/marketplace/compare");
     } else {
       window.alert("Please Select Product!");
     }
-  }
+  };
 
   // loops through products array and shows productbox for each product
   // the product box is a classname here
@@ -82,9 +75,15 @@ export default function Index() {
       <>
         {
           products.map((product) => (
-            <div className={Styles.box} key={product.id} onClick={()=>{addShoppingCar(product)}}>
-              <h1>{product.name}</h1>
-              <h1>{product.id}</h1>
+            <div
+              className={Styles.box}
+              key={product.id}
+              onClick={() => {
+                addShoppingCar(product);
+              }}
+            >
+              <h1 className="m-1">{product.name}</h1>
+              <h1 className="m-1">{product.id}</h1>
             </div>
           )) as JSX.Element[]
         }
@@ -101,9 +100,13 @@ export default function Index() {
           limitedProducts.map((product) => {
             if (!product.deal) {
               return (
-                <div className={Styles.box} key={product.id}>
-                  <h1>{product.name}</h1>
-                  <h1>{product.id}</h1>
+                <div className={Styles.box}
+                key={product.id}
+                onClick={() => {
+                  addShoppingCar(product);
+                }}>
+                  <h1 className="m-1">{product.name}</h1>
+                  <h1 className="m-1">{product.id}</h1>
                 </div>
               );
             }
@@ -114,9 +117,9 @@ export default function Index() {
   }
 
   const SearchForm = () => {
-    const [searchTerm, setSearchTerm] = useState('');
+    const [searchTerm, setSearchTerm] = useState("");
     const [products, setProducts] = useState([]);
-  
+
     useEffect(() => {
       fetch("http://localhost:3010/stores/products")
         .then((res) => res.json())
@@ -124,15 +127,17 @@ export default function Index() {
           setProducts(result.data);
         });
     }, []);
-  
+
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
     };
-  
-    const filteredProducts = products.filter(product => 
-      searchTerm.length >= 2 && product.name.toLowerCase().includes(searchTerm.toLowerCase())
+
+    const filteredProducts = products.filter(
+      (searchedProduct) =>
+        searchTerm.length >= 2 &&
+        searchedProduct.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
-  
+
     return (
       <div className="flex justify-center items-center">
         <form
@@ -172,7 +177,9 @@ export default function Index() {
                 </Link>
               ))
             ) : (
-              <li>Enter 2 or more characters to see results</li>
+              <li className="text-[#272727]">
+                Enter 2 or more characters to see results
+              </li>
             )}
           </ul>
         </form>
@@ -199,16 +206,67 @@ export default function Index() {
               <div className={Styles.grocerylist}>
                 <h1 className={Styles.title}>Shopping Cart</h1>
                 <div className={Styles.shoppingcartbox}>
-                  {shoppingCar.map((item) => (<div className={Styles.shoppingcartrows}  key={`${item.id}-ddd`}><p>{item.name}</p><button onClick={()=>{setShoppingCar(shoppingCar.filter((Fitem)=>Fitem.id !== item.id))}}>Delete</button></div>))}
-                </div>            
-                <div className="justify-self-center self-center py-2.5 mb-4 mt-auto bg-white w-[90%] text-primary text-center text-middle rounded-lg font-semibold shadow-sm hover:ring-secondary hover:text-secondary
-                    rounded-full px-4 py-2 focus:outline-none focus:shadow-outline" onClick={()=>{toCompareHandler()}}>
-                      Compare
+                  {shoppingCar.map((item) => (
+                    <div
+                      className={Styles.shoppingcartrows}
+                      key={`${item.id}-ddd`}
+                    >
+                      <div className="border-b-2 border-[#272727] rounded-tl-lg rounded-tr-lg p-2 flex justify-between items-center">
+                        <h5 className="flex-1 text-center text-xl">
+                          {item.name}
+                        </h5>
+                        <div className="rounded-full circle">
+                          <button
+                            className={Styles.deleteitemfromcart}
+                            onClick={() => {
+                              setShoppingCar(
+                                shoppingCar.filter(
+                                  (Fitem) => Fitem.id !== item.id
+                                )
+                              );
+                            }}
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="25px"
+                              height="25px"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                            >
+                              <g clip-path="url(#clip0_429_11083)">
+                                <path
+                                  d="M7 7.00006L17 17.0001M7 17.0001L17 7.00006"
+                                  stroke="#272727"
+                                  stroke-width="2.5"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                />
+                              </g>
+                              <defs>
+                                <clipPath id="clip0_429_11083">
+                                  <rect width="24" height="24" fill="white" />
+                                </clipPath>
+                              </defs>
+                            </svg>
+                          </button>
+                        </div>
+                      </div>
+                      {/* <p className="text-xl">{item.name}</p> */}
+                    </div>
+                  ))}
                 </div>
+                <a
+                  className={Styles.button}
+                  onClick={() => {
+                    toCompareHandler();
+                  }}
+                >
+                  Compare
+                </a>
               </div>
               <div className={Styles.productbox}>
                 <div className={Styles.gridlayout}>
-                  <ProductBoxes>
+                  <ProductBoxes>                    
                   </ProductBoxes>
                 </div>
               </div>

@@ -17,7 +17,7 @@ export type SwipeProps = {
 export default function Swipe(props:SwipeProps) {
   return (
     <div className={SwipeStyle["swipe-box"]}>
-      <div className={SwipeStyle["swipe-title"]}>DAILYDEALS</div>
+      <div className={SwipeStyle["swipe-title"]}>DAILY DEALS</div>
       <div className={SwipeStyle["swipe-item-box"]}>
         {/* <div className={SwipeStyle["swipe-item-left-arrow"]}></div> */}
         <svg

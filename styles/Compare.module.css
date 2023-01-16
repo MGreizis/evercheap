@@ -1,5 +1,5 @@
 .compare-page-box{
-    background-color: #838484;
+    background-color: #FFFFFF;
     justify-content: flex-start;
 }
 .compare-page-wrap{
@@ -8,7 +8,7 @@
     justify-content: flex-start;
 }
 .compare-page-exit{
-    background-color: #434848;
+    background: #272727;
     color: white;
     display: flex;
     justify-content: center;
@@ -24,7 +24,7 @@
 }
 .compare-page-goods-box-single{
     width: 300px;
-    background-color: #4f4b4b;
+    background-color: #272727;
     min-height: 600px;
     color: white;
     margin: 15px 10px 0 10px;
@@ -63,7 +63,7 @@
     margin: auto;
 }
 .goods-price{
-    background-color: #777575;
+    background-color: #272727;
     border-radius:15px;
     color: white;
     padding: 3px 40%;

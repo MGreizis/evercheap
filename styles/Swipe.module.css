@@ -1,13 +1,15 @@
 .swipe-box{
 }
 .swipe-title{
-    color: white;
+    @apply text-xl
+    pt-4;
+    color: #272727;
 }
 .swipe-item-box{
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #a09c9c;
+    background-color: #272727;
     border-radius: 5px;
 }
 .swipe-item-left-arrow{
