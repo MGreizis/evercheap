@@ -4,47 +4,24 @@ import Header from "../../components/header";
 import Footer from "../../components/footer";
 import Styles from "../../../styles/Home.module.css";
 import CompareStyles from "../../../styles/Compare.module.css";
-import Swipe,{Switem} from '../../components/Swipe';
-type CompareGoodsType = {
-  goodsName: string;
-  goodsDesc: string[];
-  goodsPrice: number;
+import Swipe, { Switem } from '../../components/Swipe';
+type Product = {
+  id: number;
+  name: string;
+  deal: boolean;
 };
+type CompareGoodsType = {
+  storeName: string;
+  goods: Product[];
+  allPrice: number;
+  isLow?: boolean;
+};
+
+const SHAPPING_CAR_KEY = "SHAPPING_CAR_KEY";
 export default function Compare() {
   const [compareGoods, setCompareGoods] = React.useState<
     Array<CompareGoodsType>
-  >([
-    {
-      goodsName: "ALBERT HEIJN",
-      goodsDesc: [
-        "Hummus Natural ",
-        "VENCO Drop",
-        "Roamboter Stroapwafels",
-        "Natural Chips",
-      ],
-      goodsPrice: 11.74,
-    },
-    {
-      goodsName: "JUMBO",
-      goodsDesc: [
-        "Hummus Natural ",
-        "VENCO Drop",
-        "Roamboter Stroapwafels",
-        "Natural Chips",
-      ],
-      goodsPrice: 9.75,
-    },
-    {
-      goodsName: "LOCAL SHOP",
-      goodsDesc: [
-        "Hummus Natural ",
-        "VENCO Drop",
-        "Roamboter Stroapwafels",
-        "Natural Chips",
-      ],
-      goodsPrice: 9.38,
-    },
-  ]);
+  >([]);
   const [swipe, setSwipe] = React.useState<Switem[]>([
     {
       src: "https://images.pexels.com/photos/942320/pexels-photo-942320.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
@@ -86,20 +63,20 @@ export default function Compare() {
       key={`key${index}`}
     >
       <div className={CompareStyles["goods-top-box"]}>
-        <div className={CompareStyles["goods-name"]}>{item.goodsName}</div>
+        <div className={CompareStyles["goods-name"]}>{item.storeName}</div>
         <div className={CompareStyles["goods-desc-box"]}>
-          {item.goodsDesc.map((descItem, descIndex) => (
+          {item.goods.map((descItem, descIndex) => (
             <div
               className={CompareStyles["goods-desc"]}
               key={`descKey${descIndex}`}
             >
-              <div className={CompareStyles["goods-desc-key"]}>{descItem}</div>
+              <div className={CompareStyles["goods-desc-key"]}>{descItem.name}</div>
               <div>1x</div>
             </div>
           ))}
         </div>
       </div>
-      <div className={CompareStyles["goods-price"]}>${item.goodsPrice}</div>
+      <div className={CompareStyles["goods-price"]} style={{ color: item.isLow ? "#ff7676" : "white", backgroundColor: item.isLow ? "rgb(59 130 246 / 0.5)" : "#777575" }}>€{item.allPrice}</div>
     </div>
   ));
   const leftArrowClick = () => {
@@ -116,6 +93,13 @@ export default function Compare() {
       setCurrentIndex(currentIndex + 1);
     }
   };
+  React.useEffect(() => {
+    const allStoreData = [{storeName:"ALBERT HEIJN",goods:[],allPrice:11.70},{storeName:"JUMBO",goods:[],allPrice:9.75},{storeName:"LOCAL SHOP",goods:[],allPrice:9.38}];
+    const shoppingData = JSON.parse(window.localStorage.getItem(SHAPPING_CAR_KEY) || "[]") ||[];
+    let minPrice = Math.min.apply(null, allStoreData.map((item) => item.allPrice));
+    let useData = allStoreData.map((item) => ({ ...item, isLow: item.allPrice === minPrice }));
+    setCompareGoods(useData.map((item)=>({...item,goods:shoppingData})));
+  }, [])
   return (
     <>
       <Head>
@@ -128,7 +112,7 @@ export default function Compare() {
         <Header />
         <main className={`${Styles.main} ${CompareStyles["compare-page-box"]}`}>
           <div className={CompareStyles["compare-page-exit"]}>Exit</div>
-          <div className={CompareStyles["compare-page-wrap"]}>{CompareDom}</div>  
+          <div className={CompareStyles["compare-page-wrap"]}>{CompareDom}</div>
           <div className={CompareStyles["compare-other-goods"]}>
             <Swipe swipeData={swipe} currentIndex={currentIndex} leftArrowClick={leftArrowClick} rightArrowClick={rightArrowClick} />
           </div>
