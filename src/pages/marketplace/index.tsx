@@ -1,4 +1,4 @@
-import React,  {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import Header from "../../components/header";
 import Footer from "../../components/footer";
@@ -6,205 +6,231 @@ import Styles from "../../../styles/Marketplace.module.css";
 import { useSession } from "@supabase/auth-helpers-react";
 import Login from "../login";
 import Link from "next/link";
-import { useUser, useSupabaseClient, Session } from "@supabase/auth-helpers-react";
+import {
+  useUser,
+  useSupabaseClient,
+  Session,
+} from "@supabase/auth-helpers-react";
 import { Database } from "../../../utils/database.types";
 
 type Products = Database["public"]["Tables"]["products"]["Row"];
 
 type Product = {
+  id: number;
 
-    id: number;
+  name: string;
 
-    name: string;
-
-    deal: boolean;
-
+  deal: boolean;
 };
 
 export default function Index() {
+  const session = useSession();
+  const supabase = useSupabaseClient<Database>();
+  const [products, setProducts] = useState<Product[]>([]);
 
-    const session = useSession();
-    const supabase = useSupabaseClient<Database>();
+  const SearchForm = () => {
+    const [searchTerm, setSearchTerm] = useState("");
+
     const [products, setProducts] = useState<Product[]>([]);
 
-    const SearchForm = () => {
-
-        const [searchTerm, setSearchTerm] = useState('');
-
-        const [products, setProducts] = useState<Product[]>([]);
-
-        useEffect(() => {
-            fetch("http://localhost:3010/stores/products")
-                .then((res) => res.json())
-                .then((result) => {
-                    setProducts(result.data);
-                });
-        }, []);
-        const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-            e.preventDefault();
-        };
-        const filteredProducts = products.filter(product =>
-            searchTerm.length >= 2 && product.name.toLowerCase().includes(searchTerm.toLowerCase())
-        );
-        return (
-            <div className="flex justify-center items-center">
-                <form
-                    onSubmit={handleSubmit}
-                    className="w-1/3 text-center p-4 rounded-md"
-                >
-                    <input
-                        type="search"
-                        className="bg-white focus:outline-none focus:shadow-outline-blue border border-secondary rounded-md py-2 px-4 block w-full appearance-none leading-normal"
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                        placeholder="Search products..."
-                    />
-                    {/* <button className="bg-primary hover:bg-secondary text-white font-bold py-2 px-4 rounded-md ml-auto">
+    useEffect(() => {
+      fetch("http://localhost:3010/stores/products")
+        .then((res) => res.json())
+        .then((result) => {
+          setProducts(result.data);
+        });
+    }, []);
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+    };
+    const filteredProducts = products.filter(
+      (product) =>
+        searchTerm.length >= 2 &&
+        product.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    return (
+      <div className="flex justify-center items-center">
+        <form
+          onSubmit={handleSubmit}
+          className="w-1/3 text-center p-4 rounded-md"
+        >
+          <input
+            type="search"
+            className="bg-white focus:outline-none focus:shadow-outline-blue border border-secondary rounded-md py-2 px-4 block w-full appearance-none leading-normal"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            placeholder="Search products..."
+          />
+          {/* <button className="bg-primary hover:bg-secondary text-white font-bold py-2 px-4 rounded-md ml-auto">
             Search
           </button> */}
-                    <ul>
-                        {filteredProducts.length !== 0 || searchTerm.length < 2 ? (
-                            filteredProducts.map((result) => (
-                                <Link href={`/products/${result.id}`} key={result.id}>
-                                    <li
-                                        className="search-result"
-                                        onMouseEnter={() => {
-                                            document
-                                                .querySelector(`.search-result[data-id="${result.id}"]`)
-                                                ?.classList.add("hovered");
-                                        }}
-                                        onMouseLeave={() => {
-                                            document
-                                                .querySelector(`.search-result[data-id="${result.id}"]`)
-                                                ?.classList.remove("hovered");
-                                        }}
-                                        data-id={result.id}
-                                    >
-                                        {result.name}
-                                    </li>
-                                </Link>
-                            ))
-                        ) : (
-                            <li>Enter 2 or more characters to see results</li>
-                        )}
-                    </ul>
-                </form>
+          <ul>
+            {filteredProducts.length !== 0 || searchTerm.length < 2 ? (
+              filteredProducts.map((result) => (
+                <Link href={`/products/${result.id}`} key={result.id}>
+                  <li
+                    className="search-result"
+                    onMouseEnter={() => {
+                      document
+                        .querySelector(`.search-result[data-id="${result.id}"]`)
+                        ?.classList.add("hovered");
+                    }}
+                    onMouseLeave={() => {
+                      document
+                        .querySelector(`.search-result[data-id="${result.id}"]`)
+                        ?.classList.remove("hovered");
+                    }}
+                    data-id={result.id}
+                  >
+                    {result.name}
+                  </li>
+                </Link>
+              ))
+            ) : (
+              <li>Enter 2 or more characters to see results</li>
+            )}
+          </ul>
+        </form>
+      </div>
+    );
+  };
+
+  // fetch for the general products api
+
+  // TODO: refactor this fetch to a separate file
+
+  useEffect(() => {
+    fetch("http://localhost:3010/stores/products")
+      .then((res) => res.json())
+      .then((result) => {
+        setProducts(result.data);
+      });
+  }, []);
+
+  type ProductProps = {
+    children: React.ReactNode;
+  };
+
+  // loops through products array and shows productbox for each product
+  // the product box is a classname here
+  function ProductBoxes({ children }: ProductProps) {
+    return (
+      <>
+        {
+          products.map((product) => (
+            <div className={Styles.box} key={product.id}>
+              <h1>{product.name}</h1>
+              <h1>{product.id}</h1>
             </div>
-        );
-    };
-
-    // fetch for the general products api
-
-    // TODO: refactor this fetch to a separate file
-
-    useEffect(() => {
-        fetch("http://localhost:3010/stores/products")
-            .then((res) => res.json())
-            .then((result) => {
-                setProducts(result.data);
-            });
-    }, []);
-
-
-    type ProductProps = {
-        children: React.ReactNode;
-    }
-
-    // loops through products array and shows productbox for each product
-    // the product box is a classname here
-    function ProductBoxes({ children }: ProductProps) {
-        return (
-            <>
-                {
-                    products.map((product) => (
-                        <div className={Styles.box} key={product.id}>
-                            <h1>{product.name}</h1>
-                            <h1>{product.id}</h1>
-                        </div>
-                    )) as JSX.Element[]
-                }
-            </>
-        );
-    }
-
-    function DealBoxes({ children }: ProductProps) {
-        const limitedProducts = products.slice(0, 3);
-
-        return (
-            <>
-                {
-                    limitedProducts.map((product) => {
-                        if (!product.deal) {
-                            return (
-                                <div className={Styles.box} key={product.id}>
-                                    <h1>{product.name}</h1>
-                                    <h1>{product.id}</h1>
-                                </div>
-                            );
-                        }
-                    }) as JSX.Element[]
-                }
-            </>
-        );
-    }
-
-
-
-    async function getProducts() {
-        const { data, error } = await supabase
-            .from("products")
-            .select("*")
-            .order("id", { ascending: true });
-        if (error) {
-            console.log(error);
+          )) as JSX.Element[]
         }
-        console.log(data);
-    }
+      </>
+    );
+  }
+
+  function DealBoxes({ children }: ProductProps) {
+    const limitedProducts = products.slice(0, 3);
 
     return (
-        <>
-            <Head>
-                <title>Evercheap</title>
-                <meta name="description" content="Evercheap" />
-                <link rel="icon" href="/favicon.ico" />
-            </Head>
-
-            {!session ? (
-                <Login />
-            ) : (
-                <div className="bg-tertiary isolate">
-                    <Header />
-                    <main className={Styles.main}>
-                        <SearchForm/>
-                        <div className={Styles.maingridlayout}>
-                            <div className={Styles.grocerylist}>
-                                <h1 className={Styles.title}>Grocery List</h1>
-                                <Link
-                                    href="/marketplace/compare"
-                                    className={Styles.button}
-                                >
-                                    Compare
-                                </Link>
-                            </div>
-                            <div className={Styles.productbox}>
-                                <div className={Styles.gridlayout}>
-                                    <ProductBoxes></ProductBoxes>
-                                </div>
-                            </div>
-                            <div className={Styles.dealsbox}>
-                                <a href="#">
-                                    <svg className="w-12 h-12" color="white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
-                                </a>
-                                    <DealBoxes></DealBoxes>
-                                <a href="#">
-                                    <svg className="w-12 h-12" color="white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
-                                </a>
-                            </div>
-                        </div>
-                    </main>
-                    <Footer />
+      <>
+        {
+          limitedProducts.map((product) => {
+            if (!product.deal) {
+              return (
+                <div className={Styles.box} key={product.id}>
+                  <h1>{product.name}</h1>
+                  <h1>{product.id}</h1>
                 </div>
-            )}
-        </>
+              );
+            }
+          }) as JSX.Element[]
+        }
+      </>
     );
+  }
+
+  async function getProducts() {
+    const { data, error } = await supabase
+      .from("products")
+      .select("*")
+      .order("id", { ascending: true });
+    if (error) {
+      console.log(error);
+    }
+    console.log(data);
+  }
+
+  return (
+    <>
+      <Head>
+        <title>Evercheap</title>
+        <meta name="description" content="Evercheap" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+
+      {!session ? (
+        <Login />
+      ) : (
+        <div className="bg-tertiary isolate">
+          <Header />
+          <main className={Styles.main}>
+            <SearchForm />
+            <div className={Styles.maingridlayout}>
+              <div className={Styles.grocerylist}>
+                <h1 className={Styles.title}>Grocery List</h1>
+                <Link href="/marketplace/compare" className={Styles.button}>
+                  Compare
+                </Link>
+              </div>
+              <div className={Styles.productbox}>
+                <div className={Styles.gridlayout}>
+                  <ProductBoxes>
+                  </ProductBoxes>
+                </div>
+              </div>
+              <div className={Styles.dealsbox}>
+                <a href="#">
+                  <svg
+                    className="w-12 h-12"
+                    color="white"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M15 19l-7-7 7-7"
+                    />
+                  </svg>
+                </a>
+                <DealBoxes>                  
+                </DealBoxes>
+                <a href="#">
+                  <svg
+                    className="w-12 h-12"
+                    color="white"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </main>
+          <Footer />
+        </div>
+      )}
+    </>
+  );
 }
