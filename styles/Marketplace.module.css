@@ -122,7 +122,7 @@
 .box {
   width: 270px;
   height: 270px;
-
+  margin-bottom: 20px;
   background: #FFFFFF;
   border-radius: 20px;
 }
@@ -161,11 +161,11 @@
   display: grid;
   justify-content: center;
   align-items: center;
-
   grid-column-start: 2;
   grid-column-end: 4;
-
   background: #282828;
+  @apply scrollbar-thin scrollbar-thumb-secondary;
+  background: #C9C9C9;
   color: #666666;
   min-width: 100%;
   height: 80vh;

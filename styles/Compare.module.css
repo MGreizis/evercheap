@@ -1,0 +1,73 @@
+.compare-page-box{
+    background-color: #838484;
+    justify-content: flex-start;
+}
+.compare-page-wrap{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+.compare-page-exit{
+    background-color: #434848;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2px 150px;
+    border-radius: 20px;
+
+}
+.compare-page-goods-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.compare-page-goods-box-single{
+    width: 300px;
+    background-color: #4f4b4b;
+    min-height: 600px;
+    color: white;
+    margin: 15px 10px 0 10px;
+    border-radius: 10px;
+    padding: 20px 10px 10px 20px ;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.goods-top-box{
+    width: 100%;
+}
+.goods-name{
+    text-align: center;
+    margin-bottom: 10px;
+    text-decoration:underline;
+}
+.goods-desc-box{
+
+}
+.goods-desc{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 5px 0;
+    position: relative;
+}
+.goods-desc::before{
+    content: '-';
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: -10px;
+    margin: auto;
+}
+.goods-price{
+    background-color: #777575;
+    border-radius:15px;
+    color: white;
+    padding: 3px 40%;
+}
+.compare-other-goods{
+    margin-top: 20px;
+}
