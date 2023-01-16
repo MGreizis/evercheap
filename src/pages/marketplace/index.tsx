@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import Head from "next/head";
+import { useRouter } from 'next/router'
 import Header from "../../components/header";
 import Footer from "../../components/footer";
 import Styles from "../../../styles/Marketplace.module.css";
@@ -15,12 +16,16 @@ type Product = {
   name: string;
   deal: boolean;
 };
-
+const SHAPPING_CAR_KEY = "SHAPPING_CAR_KEY";
 export default function Index() {
   const session = useSession();
+  
   const supabase = useSupabaseClient<Database>();
   // hook for all products
   const [products, setProducts] = useState<Product[]>([]);
+
+  const [shoppingCar, setShoppingCar] = useState<Product[]>([]);
+  const router = useRouter();
 
   // fetch for the general products api
   // TODO: refactor this fetch to a separate file
@@ -30,12 +35,30 @@ export default function Index() {
       .then((result) => {
         setProducts(result.data);
       });
+      setShoppingCar(JSON.parse(window.localStorage.getItem(SHAPPING_CAR_KEY))||[])
   }, []);
 
   type ProductProps = {
     children: React.ReactNode;
   };
-
+  const addShoppingCar = (product:Product)=>{
+    if(!shoppingCar.find((item)=>item.id === product.id)){
+      setShoppingCar([...shoppingCar,product]);
+    }else{
+      window.alert("Exists");
+    }
+  }
+  const toCompareHandler = ()=>{
+    const addLocaShoppingCar = (newCarData:Product[])=>{
+      window.localStorage.setItem("SHAPPING_CAR_KEY",JSON.stringify(Object.values(newCarData)));
+    }
+    if(shoppingCar.length>0){
+      addLocaShoppingCar(shoppingCar);
+      router.push("/marketplace/compare");
+    }else{
+      window.alert("Please Select Product!");
+    }
+  }
   // loops through products array and shows productbox for each product
   // the product box is a classname here
   function ProductBoxes({ children }: ProductProps) {
@@ -43,7 +66,7 @@ export default function Index() {
       <>
         {
           products.map((product) => (
-            <div className={Styles.box} key={product.id}>
+            <div className={Styles.box} key={product.id} onClick={()=>{addShoppingCar(product)}}>
               <h1>{product.name}</h1>
               <h1>{product.id}</h1>
             </div>
@@ -157,14 +180,21 @@ export default function Index() {
             <div className={Styles.maingridlayout}>
               <div className={Styles.shoppingcart}>
                 <h1 className={Styles.title}>Shopping Cart</h1>
-                <Link
+                <div className={Styles.shoppingcartbox}>
+                  {shoppingCar.map((item) => (<div className={Styles.shoppingcartrows}  key={`${item.id}-ddd`}><p>{item.name}</p><button onClick={()=>{setShoppingCar(shoppingCar.filter((Fitem)=>Fitem.id !== item.id))}}>Delete</button></div>))}
+                </div>
+                {/* <Link
                   href="/marketplace/compare"
                   className="
                     justify-self-center self-center py-2.5 mb-4 mt-auto bg-white w-[90%] text-primary text-center text-middle rounded-lg font-semibold shadow-sm hover:ring-secondary hover:text-secondary
                     rounded-full px-4 py-2 focus:outline-none focus:shadow-outline"
                 >
                   Compare
-                </Link>
+                </Link> */}
+                <div className="justify-self-center self-center py-2.5 mb-4 mt-auto bg-white w-[90%] text-primary text-center text-middle rounded-lg font-semibold shadow-sm hover:ring-secondary hover:text-secondary
+                    rounded-full px-4 py-2 focus:outline-none focus:shadow-outline" onClick={()=>{toCompareHandler()}}>
+                      Compare
+                    </div>
               </div>
               <div className={Styles.productbox}>
                 <div className={Styles.gridlayout}>
