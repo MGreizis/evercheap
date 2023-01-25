@@ -8,7 +8,6 @@ import Login from "../login";
 import Link from "next/link";
 import { useUser, useSupabaseClient, Session } from "@supabase/auth-helpers-react";
 import { Database } from "../../../utils/database.types";
-// import Checkbox from "../../components/checkbox";
 
 type Products = Database["public"]["Tables"]["products"]["Row"];
 type Product = {
@@ -16,15 +15,13 @@ type Product = {
   name: string;
   deal: boolean;
 };
-interface CheckboxProps {
-  checked: boolean;
-  label: string;
-  name: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-};
+
 export default function Index() {
   const session = useSession();
   const supabase = useSupabaseClient<Database>();
+  const [query, setQuery] = useState('');
+  const [search, setSearch]: [string, (search: string) => void] = React.useState('');
+
 
   // hook for all products
   const [products, setProducts] = useState<Product[]>([]);
@@ -78,18 +75,12 @@ export default function Index() {
       </>
     );
   }
-    // checkbox
-    const [isChecked, setIsChecked] = useState(false)
-    const [productType, setProductType] = React.useState<CheckboxProps[]>([]);
 
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-      event.preventDefault();
-      setIsChecked(event.target.checked);
-    };
-
-    const checkedProducts = products.filter(product => 
-      products.length
-    );
+  // set the value of our useState query anytime the user types on our input
+const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
+  e.preventDefault();
+  setSearch(e.currentTarget.value)
+  }
 
   return (
     <>
@@ -104,7 +95,6 @@ export default function Index() {
       ) : (
         <div className="bg-tertiary isolate">
           <Header />
-          <Checkbox label="My Checkbox" isChecked={isChecked} onChange={handleChange} />
           <main className={Styles.main}>
             <div className={Styles.maingridlayout}>
               <div className={Styles.shoppingcart}>
@@ -118,10 +108,24 @@ export default function Index() {
                   Compare
                 </Link>
               </div>
+              <input onChange={handleChange} type='text' placeholder='Search..'/>
+
               <div className={Styles.productbox}>
                 <div className={Styles.gridlayout}>
                   <ProductBoxes>
                   </ProductBoxes>
+
+                  {products.map((product) => {
+                    if (search == "" || product.name.toLowerCase().includes(search.toLowerCase())) {
+                      return (
+                        <div className={Styles.box} key={product.id}>
+                          <h1>{product.name}</h1>
+                          <h1>{product.id}</h1>
+                        </div>
+                      );
+                    }
+                  }
+                  )}
                 </div>
               </div>
               <div className={Styles.dealsbox}>
