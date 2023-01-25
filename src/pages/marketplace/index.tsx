@@ -10,6 +10,7 @@ import Login from "../login";
 import Link from "next/link";
 import { useUser, useSupabaseClient, Session } from "@supabase/auth-helpers-react";
 import { Database } from "../../../utils/database.types";
+import debounce from "lodash.debounce";
 
 type Products = Database["public"]["Tables"]["products"]["Row"];
 type Product = {
@@ -44,6 +45,7 @@ export default function Index() {
   }, []);
 
   type ProductProps = {
+    searchTerm: string;
     children: React.ReactNode;
   };
 
@@ -71,8 +73,25 @@ export default function Index() {
 
   // loops through products array and shows productbox for each product
   // the product box is a classname here
-  function ProductBoxes({ children }: ProductProps) {
-    const limitedProducts = products.slice(3, 15);
+  // !! old comments ^^^
+
+  const createProductBox = (product: Product) => {
+    return (
+      <div
+        className={Styles.box}
+        key={product.id}
+        onClick={() => {
+          addShoppingCar(product);
+        }}
+      >
+        <h1 className="m-1 flex justify-center">{product.name}</h1>
+        <img className="h-[80%] w-[85%]" src={product.imageurl} alt="product" />
+      </div>
+    );
+  };
+
+  function ProductBoxes({ searchTerm, children }: ProductProps) {
+    const limitedProducts = products.slice(3, 15).filter(product => product.name.toLowerCase().includes(searchTerm.toLowerCase()));
     return (
       <>
         {
@@ -84,8 +103,9 @@ export default function Index() {
                 addShoppingCar(product);
               }}
             >
-              <h1 className="m-1 flex justify-center">{product.name}</h1>
-              <img className="h-[80%] w-[85%]" src={product.imageurl} alt="product"/>
+              {/* <h1 className="m-1 flex justify-center">{product.name}</h1>
+              <img className="h-[80%] w-[85%]" src={product.imageurl} alt="product"/> */}
+              {createProductBox(product)}
             </div>
           )) as JSX.Element[]
         }
@@ -117,29 +137,40 @@ export default function Index() {
       </>
     );
   }
-
+  
+  const [searchTerm, setSearchTerm] = useState("");  
+  
   const SearchForm = () => {
-    const [searchTerm, setSearchTerm] = useState("");
-    const [products, setProducts] = useState([]);
+    // const [searchTerm, setSearchTerm] = useState("");
+    const [filteredProducts, setFilteredProducts] = useState([]);
 
-    useEffect(() => {
-      fetch("http://localhost:3010/stores/products")
-        .then((res) => res.json())
-        .then((result) => {
-          setProducts(result.data);
-        });
-    }, []);
+    // debounced function to handle API calls
+    const fetchProducts = debounce((term: string) => {
+        fetch(`http://localhost:3010/stores/products?search=${term}`)
+          .then((res) => res.json())
+          .then((result) => {
+            setFilteredProducts(result.data);
+          });
+    }, 500);
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
-    };
+      const filteredProducts = products.filter(
+        (searchedProduct) =>
+          searchTerm.length >= 2 &&
+          searchedProduct.name.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setProducts(filteredProducts);
+    };  
 
-    const filteredProducts = products.filter(
-      (searchedProduct) =>
-        searchTerm.length >= 2 &&
-        searchedProduct.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const term = e.target.value;
+        setSearchTerm(term);
+        if (term.length >= 2) {
+            fetchProducts(term);
+        }
+    }
+    
     return (
       <div className="flex justify-center items-center">
         <form
@@ -150,40 +181,13 @@ export default function Index() {
             type="search"
             className="bg-white focus:outline-none focus:shadow-outline-blue border border-secondary rounded-md py-2 px-4 block w-full appearance-none leading-normal"
             value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
+            onChange={handleChange}
             placeholder="Search products..."
-          />
-          <div
-            className="productsContainer"
-            style={{ display: searchTerm.length >= 2 ? "block" : "none" }}
-          >
-            {searchTerm.length >= 2 ? (
-              (filteredProducts.map((product) => (
-                <div
-                  className={Styles.box}
-                  key={product.id}
-                  onClick={() => {
-                    addShoppingCar(product);
-                  }}
-                >
-                  <h1 className="m-1 flex justify-center">{product.name}</h1>
-                  <img
-                    className="h-[80%] w-[85%]"
-                    src={product.imageurl}
-                    alt="product"
-                  />
-                </div>
-              )) as JSX.Element[])
-            ) : (
-              <p>Enter at least 2 characters to search</p>
-            )}
-          </div>
+            />
         </form>
       </div>
     );
-  };
-                  
-
+  }
 
   return (
     <>
@@ -231,13 +235,13 @@ export default function Index() {
                               viewBox="0 0 24 24"
                               fill="none"
                             >
-                              <g clip-path="url(#clip0_429_11083)">
+                              <g clipPath="url(#clip0_429_11083)">
                                 <path
                                   d="M7 7.00006L17 17.0001M7 17.0001L17 7.00006"
                                   stroke="#272727"
-                                  stroke-width="2.5"
-                                  stroke-linecap="round"
-                                  stroke-linejoin="round"
+                                  strokeWidth="2.5"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
                                 />
                               </g>
                               <defs>
@@ -264,7 +268,8 @@ export default function Index() {
               </div>
               <div className={Styles.productbox}>
                 <div className={Styles.gridlayout}>
-                  <ProductBoxes>                    
+                  <ProductBoxes searchTerm={searchTerm}>
+                    children={undefined}
                   </ProductBoxes>
                 </div>
               </div>
@@ -286,7 +291,8 @@ export default function Index() {
                     />
                   </svg>
                 </a>
-                <DealBoxes>                  
+                <DealBoxes searchTerm={""}>
+                  children={undefined}
                 </DealBoxes>
                 <a href="#">
                   <svg
