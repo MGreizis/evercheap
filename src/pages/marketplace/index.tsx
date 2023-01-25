@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
@@ -107,7 +108,7 @@ export default function Index() {
                   addShoppingCar(product);
                 }}>
                   <h1 className="flex justify-center m-1">{product.name}</h1>
-                  <img class="h-[80%] w-[85%]" src={product.imageurl} alt="product"/>
+                  <img className="h-[80%] w-[85%]" src={product.imageurl} alt="product"/>
                 </div>
               );
             }
@@ -152,41 +153,37 @@ export default function Index() {
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder="Search products..."
           />
-          {/* <button className="bg-primary hover:bg-secondary text-white font-bold py-2 px-4 rounded-md ml-auto">
-            Search
-          </button> */}
-          <ul>
-            {filteredProducts.length !== 0 || searchTerm.length < 2 ? (
-              filteredProducts.map((result) => (
-                <Link href={`/products/${result.id}`} key={result.id}>
-                  <li
-                    className="search-result"
-                    onMouseEnter={() => {
-                      document
-                        .querySelector(`.search-result[data-id="${result.id}"]`)
-                        ?.classList.add("hovered");
-                    }}
-                    onMouseLeave={() => {
-                      document
-                        .querySelector(`.search-result[data-id="${result.id}"]`)
-                        ?.classList.remove("hovered");
-                    }}
-                    data-id={result.id}
-                  >
-                    {result.name}
-                  </li>
-                </Link>
-              ))
+          <div
+            className="productsContainer"
+            style={{ display: searchTerm.length >= 2 ? "block" : "none" }}
+          >
+            {searchTerm.length >= 2 ? (
+              (filteredProducts.map((product) => (
+                <div
+                  className={Styles.box}
+                  key={product.id}
+                  onClick={() => {
+                    addShoppingCar(product);
+                  }}
+                >
+                  <h1 className="m-1 flex justify-center">{product.name}</h1>
+                  <img
+                    className="h-[80%] w-[85%]"
+                    src={product.imageurl}
+                    alt="product"
+                  />
+                </div>
+              )) as JSX.Element[])
             ) : (
-              <li className="text-[#272727]">
-                Enter 2 or more characters to see results
-              </li>
+              <p>Enter at least 2 characters to search</p>
             )}
-          </ul>
+          </div>
         </form>
       </div>
     );
   };
+                  
+
 
   return (
     <>
