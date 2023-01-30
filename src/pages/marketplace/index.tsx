@@ -7,7 +7,11 @@ import Styles from "../../../styles/Marketplace.module.css";
 import { useSession } from "@supabase/auth-helpers-react";
 import Login from "../login";
 import Link from "next/link";
-import { useUser, useSupabaseClient, Session } from "@supabase/auth-helpers-react";
+import {
+  useUser,
+  useSupabaseClient,
+  Session,
+} from "@supabase/auth-helpers-react";
 import { Database } from "../../../utils/database.types";
 
 type Products = Database["public"]["Tables"]["products"]["Row"];
@@ -37,9 +41,6 @@ export default function Index() {
       .then((result) => {
         setProducts(result.data);
       });
-    // setShoppingCar(
-    //   JSON.parse(window.localStorage.getItem(SHAPPING_CAR_KEY)) || []
-    // );
   }, []);
 
   type ProductProps = {
@@ -55,14 +56,26 @@ export default function Index() {
   };
   const toCompareHandler = () => {
     const addLocaShoppingCar = (newCarData: Product[]) => {
-      window.localStorage.setItem(
-        "SHAPPING_CAR_KEY",
-        JSON.stringify(Object.values(newCarData))
-      );
+      let data = Object.values(newCarData);
+      fetch("http://localhost:3022/saveMall", {
+        method: "post",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((res) => res.json())
+        .then((result) => {
+          if(result.code === 0){
+            router.push(`/marketplace/compare?id=${result.data}`);
+          }else{
+            window.alert(result.message);
+          }
+        });
     };
     if (shoppingCar.length > 0) {
       addLocaShoppingCar(shoppingCar);
-      router.push("/marketplace/compare");
+      // router.push("/marketplace/compare");
     } else {
       window.alert("Please Select Product!");
     }
@@ -84,7 +97,11 @@ export default function Index() {
               }}
             >
               <h1 className="m-1 flex justify-center">{product.name}</h1>
-              <img className="h-[80%] w-[85%]" src={product.imageurl} alt="product"/>
+              <img
+                className="h-[80%] w-[85%]"
+                src={product.imageurl}
+                alt="product"
+              />
             </div>
           )) as JSX.Element[]
         }
@@ -101,13 +118,19 @@ export default function Index() {
           limitedProducts.map((product) => {
             if (!product.deal) {
               return (
-                <div className={Styles.box}
-                key={product.id}
-                onClick={() => {
-                  addShoppingCar(product);
-                }}>
+                <div
+                  className={Styles.box}
+                  key={product.id}
+                  onClick={() => {
+                    addShoppingCar(product);
+                  }}
+                >
                   <h1 className="flex justify-center m-1">{product.name}</h1>
-                  <img class="h-[80%] w-[85%]" src={product.imageurl} alt="product"/>
+                  <img
+                    class="h-[80%] w-[85%]"
+                    src={product.imageurl}
+                    alt="product"
+                  />
                 </div>
               );
             }
@@ -267,8 +290,7 @@ export default function Index() {
               </div>
               <div className={Styles.productbox}>
                 <div className={Styles.gridlayout}>
-                  <ProductBoxes>                    
-                  </ProductBoxes>
+                  <ProductBoxes></ProductBoxes>
                 </div>
               </div>
               <div className={Styles.dealsbox}>
@@ -289,8 +311,7 @@ export default function Index() {
                     />
                   </svg>
                 </a>
-                <DealBoxes>                  
-                </DealBoxes>
+                <DealBoxes></DealBoxes>
                 <a href="#">
                   <svg
                     className="w-12 h-12"
