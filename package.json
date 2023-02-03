@@ -11,11 +11,12 @@
   "dependencies": {
     "@headlessui/react": "^1.7.4",
     "@heroicons/react": "^2.0.13",
+    "@material-tailwind/react": "^1.2.5",
     "@rikvanhaaren/ah_shop_api": "^1.0.4",
     "@supabase/auth-helpers-nextjs": "^0.5.2",
     "@supabase/auth-helpers-react": "^0.3.1",
     "@supabase/auth-ui-react": "^0.2.6",
-    "@supabase/supabase-js": "^2.1.0",
+    "@supabase/supabase-js": "^2.2.3",
     "@types/node": "18.11.9",
     "@types/react": "18.0.25",
     "@types/react-dom": "18.0.8",
@@ -23,9 +24,11 @@
     "eslint": "8.27.0",
     "eslint-config-next": "13.0.3",
     "express": "^4.18.2",
+    "isomorphic-unfetch": "^3.1.0",
     "next": "13.0.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "tailwind-scrollbar": "^2.0.1",
     "typescript": "4.8.4"
   },
   "devDependencies": {

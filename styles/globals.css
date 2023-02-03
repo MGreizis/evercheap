@@ -7,8 +7,8 @@ body {
   padding: 0;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-    scroll-behavior: smooth;
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,"Outfit", sans-serif;
+  scroll-behavior: smooth;
 }
 
 a {
@@ -29,3 +29,26 @@ a {
     background: black;
   }
 }
+
+.dealsbox {
+  @apply bg-primary
+		text-secondary
+		min-w-full
+		rounded;
+}
+
+.productbox {
+  @apply bg-primary
+		text-secondary
+		min-w-full
+    h-[80vh]
+		rounded;
+}
+
+.shoppingcart {
+  @apply bg-primary
+    text-secondary
+    min-w-full
+    rounded;
+}
+
