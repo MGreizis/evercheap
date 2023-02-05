@@ -16,9 +16,15 @@ export interface Database {
         Row: any;
       };
 
-      Views: {
-        [_ in never]: never;
+      products: {
+        id: string;
+        name: string;
+        price: number;
+        nutriscore: string;
+        store: string;
+        Row: any;
       };
+      
       Functions: {
         [_ in never]: never;
       };

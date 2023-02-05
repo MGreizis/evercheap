@@ -26,11 +26,13 @@
   justify-content: center;
   align-items: center;
   flex-grow: 1;
+  font-family: "Outfit", sans-serif;
 }
 
 .title a {
   color: #0070f3;
   text-decoration: none;
+  font-family: "Outfit", sans-serif;
 }
 
 .title a:hover,
@@ -43,17 +45,20 @@
   margin: 0;
   line-height: 1.15;
   font-size: 4rem;
+  font-family: "Outfit", sans-serif;
 }
 
 .title,
 .description {
   text-align: center;
+  font-family: "Outfit", sans-serif;
 }
 
 .description {
   margin: 4rem 0;
   line-height: 1.5;
   font-size: 1.5rem;
+  font-family: "Outfit", sans-serif;
 }
 
 .code {

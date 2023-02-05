@@ -1,0 +1,88 @@
+.swipe-box{
+}
+.swipe-title{
+    @apply text-xl
+    pt-4;
+    color: #272727;
+}
+.swipe-item-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #272727;
+    border-radius: 5px;
+}
+.swipe-item-left-arrow{
+    width: 40px;
+}
+.swipe-item-right-arrow{
+    transform: rotate(180deg);
+    width: 40px;
+}
+.swipe-item-inside-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.swipe-item{
+    width: 120px;
+    height: 120px;
+    border-radius: 5px;
+    background-color: white;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 20px;
+    transform: scale(1);
+}
+.swipe-item.big-level-1{
+    transform: scale(1.2);
+    margin-top: -30px;
+}
+.swipe-item.big-level-2{
+    transform: scale(1.1);
+}
+.swipe-item img{
+    width: 80%;
+    height: 100px;
+}
+.swipe-item-view{
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    right: 0;
+    background-color: #252626;
+    border-radius: 5px;
+    color: white;
+    width: 80px;
+    height: 20px;
+    font-size: 16px;
+    text-align: center;
+    line-height: 20px;
+    margin: auto;
+}
+.swipe-item-inside-box-wrap{
+    position: relative;
+}
+.swipe-item-circ-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    bottom: -30px;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.swipe-item-circ{
+    width: 8px;
+    height: 8px;
+    border:1px solid white;
+    border-radius: 100%;
+    margin: 0 5px;
+}
+.swipe-item-circ.selected{
+    background-color: white;
+}
