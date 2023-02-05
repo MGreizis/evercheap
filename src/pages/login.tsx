@@ -31,7 +31,7 @@ const Login = () => {
               <Auth
                 supabaseClient={supabase}
                 appearance={{ theme: ThemeSupa }}
-                theme="dark"
+                theme="minimal"
               />
             ) : (
             <Account session={session}/>
