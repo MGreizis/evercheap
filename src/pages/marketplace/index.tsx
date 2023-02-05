@@ -39,9 +39,6 @@ export default function Index() {
       .then((result) => {
         setProducts(result.data);
       });
-    // setShoppingCar(
-    //   JSON.parse(window.localStorage.getItem(SHAPPING_CAR_KEY)) || []
-    // );
   }, []);
 
   type ProductProps = {
@@ -56,16 +53,29 @@ export default function Index() {
       window.alert("Exists");
     }
   };
+  
   const toCompareHandler = () => {
     const addLocaShoppingCar = (newCarData: Product[]) => {
-      window.localStorage.setItem(
-        "SHAPPING_CAR_KEY",
-        JSON.stringify(Object.values(newCarData))
-      );
+      let data = Object.values(newCarData);
+      fetch("http://localhost:3022/saveMall", {
+        method: "post",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((res) => res.json())
+        .then((result) => {
+          if(result.code === 0){
+            router.push(`/marketplace/compare?id=${result.data}`);
+          }else{
+            window.alert(result.message);
+          }
+        });
     };
     if (shoppingCar.length > 0) {
       addLocaShoppingCar(shoppingCar);
-      router.push("/marketplace/compare");
+      // router.push("/marketplace/compare");
     } else {
       window.alert("Please Select Product!");
     }

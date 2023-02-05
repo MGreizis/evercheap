@@ -1,5 +1,6 @@
 import React from "react";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import Header from "../../components/header";
 import Footer from "../../components/footer";
 import Styles from "../../../styles/Home.module.css";
@@ -59,25 +60,29 @@ export default function Compare() {
     },
   ]);
   const [currentIndex, setCurrentIndex] = React.useState<number>(0);
-  const CompareDom = compareGoods.map((item, index) => (
+  const CompareDom = compareGoods.map((item:any, index) => (
     <div
       className={CompareStyles["compare-page-goods-box-single"]}
       key={`key${index}`}
     >
       <div className={CompareStyles["goods-top-box"]}>
-        <div className={CompareStyles["goods-name"]}>{item.storeName}</div>
+        <div className={CompareStyles["goods-name"]}>{item.mallName}</div>
         <div className={CompareStyles["goods-desc-box"]}>
-          {item.goods.map((descItem, descIndex) => (
+          {item.mallProducts?item.mallProducts.map((descItem:any, descIndex:number) => (
             <div
-            className="border-b-2 border-[#FFFFFF] rounded-tl-lg rounded-tr-lg p-2 flex justify-between items-center max-w-[95%]"
+              className="border-b-2 border-[#FFFFFF] rounded-tl-lg rounded-tr-lg p-2 flex justify-between items-center max-w-[95%]"
               key={`descKey${descIndex}`}
             >
-              <Link href={`/products/${descItem.id}`} key={descItem.id} className={CompareStyles["goods-desc-key"]}>
+              <Link
+                href={`/products/${descItem.id}`}
+                key={descItem.id}
+                className={CompareStyles["goods-desc-key"]}
+              >
                 - {descItem.name}
               </Link>
               <div>1x</div>
             </div>
-          ))}
+          )):''}
         </div>
       </div>
       <div
@@ -87,7 +92,7 @@ export default function Compare() {
           backgroundColor: item.isLow ? "rgb(59 130 246 / 0.5)" : "#777575",
         }}
       >
-        €{item.allPrice}
+        €{item.mallAllPrice}
       </div>
     </div>
   ));
@@ -105,24 +110,27 @@ export default function Compare() {
       setCurrentIndex(currentIndex + 1);
     }
   };
+  const router = useRouter();
+  console.log(router);
   React.useEffect(() => {
-    const allStoreData = [
-      { storeName: "ALBERT HEIJN", goods: [], allPrice: 11.7 },
-      { storeName: "JUMBO", goods: [], allPrice: 9.75 },
-      { storeName: "LOCAL SHOP", goods: [], allPrice: 9.38 },
-    ];
-    const shoppingData =
-      JSON.parse(window.localStorage.getItem(SHAPPING_CAR_KEY) || "[]") || [];
-    let minPrice = Math.min.apply(
-      null,
-      allStoreData.map((item) => item.allPrice)
-    );
-    let useData = allStoreData.map((item) => ({
-      ...item,
-      isLow: item.allPrice === minPrice,
-    }));
-    setCompareGoods(useData.map((item) => ({ ...item, goods: shoppingData })));
-  }, []);
+    if (router.query.id) {
+      fetch(`http://localhost:3022/mallById?id=${router.query.id}`)
+        .then((res) => res.json())
+        .then((result) => {
+          let serverData = result && result[0] && result[0].mallData && result[0].mallData || [];
+          let minPrice = Math.min.apply(
+            null,
+            serverData.map((item:any) => item.mallAllPrice)
+          );
+          let useData = serverData.map((item:any) => ({
+            ...item,
+            isLow: item.mallAllPrice === minPrice,
+          }));
+          let endData = useData.map((item:any) => ({ ...item, goods: item.mallData }));
+          setCompareGoods(endData);
+        });
+    }
+  }, [router]);
   return (
     <>
       <Head>
