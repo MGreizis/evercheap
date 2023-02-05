@@ -53,7 +53,7 @@ export default function Index() {
       window.alert("Exists");
     }
   };
-  
+
   const toCompareHandler = () => {
     const addLocaShoppingCar = (newCarData: Product[]) => {
       let data = Object.values(newCarData);
@@ -216,7 +216,7 @@ export default function Index() {
             <SearchForm />
             <div className={Styles.maingridlayout}>
               <div className={Styles.grocerylist}>
-                <h1 className={Styles.title}>Shopping Cart</h1>
+                <h1 className={Styles.title}>Shopping List</h1>
                 <div className={Styles.shoppingcartbox}>
                   {shoppingCar.map((item) => (
                     <div
