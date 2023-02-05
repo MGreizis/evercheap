@@ -5,7 +5,9 @@ import Footer from "../../components/footer";
 import Styles from "../../../styles/Home.module.css";
 import CompareStyles from "../../../styles/Compare.module.css";
 import Swipe, { Switem } from "../../components/Swipe";
+import { PDFDownloadLink } from "@react-pdf/renderer";
 import Link from "next/link";
+import {PdfDocument} from "./pdfgenerator/product";
 
 type Product = {
   id: number;
@@ -24,6 +26,7 @@ export default function Compare() {
   const [compareGoods, setCompareGoods] = React.useState<
     Array<CompareGoodsType>
   >([]);
+
   const [swipe, setSwipe] = React.useState<Switem[]>([
     {
       src: "https://images.pexels.com/photos/942320/pexels-photo-942320.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
@@ -80,15 +83,26 @@ export default function Compare() {
           ))}
         </div>
       </div>
-      <div
-        className={CompareStyles["goods-price"]}
-        style={{
-          color: item.isLow ? "#ff7676" : "white",
-          backgroundColor: item.isLow ? "rgb(59 130 246 / 0.5)" : "#777575",
-        }}
+      <PDFDownloadLink
+          document={<PdfDocument allPrice={item.allPrice} goods={item.goods} storeName={item.storeName} />}
+          fileName="shopping-list.pdf"
       >
-        €{item.allPrice}
-      </div>
+        {({ blob, url, loading, error }) =>
+            loading ? "Loading document..." : <div
+                className={CompareStyles["goods-price"]}
+                style={{
+                  width: "100px",
+                  padding: "2px 10px",
+                  textAlign: "center",
+                  color: item.isLow ? "#ff7676" : "white",
+                  backgroundColor: item.isLow ? "rgb(59 130 246 / 0.5)" : "#777575",
+                }}
+            >
+              €{item.allPrice}
+            </div>
+        }
+      </PDFDownloadLink>
+
     </div>
   ));
   const leftArrowClick = () => {
