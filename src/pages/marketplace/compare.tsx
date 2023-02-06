@@ -89,7 +89,7 @@ export default function Compare() {
         </div>
       </div>
       <PDFDownloadLink
-          document={<PdfDocument allPrice={item.allPrice} goods={item.goods} storeName={item.storeName} />}
+          document={<PdfDocument allPrice={item.allPrice} goods={item.mallProducts} storeName={item.mallName} />}
           fileName="shopping-list.pdf"
       >
         {({ blob, url, loading, error }) =>
@@ -131,6 +131,7 @@ export default function Compare() {
       fetch(`http://localhost:3022/mallById?id=${router.query.id}`)
         .then((res) => res.json())
         .then((result) => {
+          console.log(result);
           let serverData = result && result[0] && result[0].mallData && result[0].mallData || [];
           let minPrice = Math.min.apply(
             null,
