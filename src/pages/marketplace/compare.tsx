@@ -89,7 +89,7 @@ export default function Compare() {
         </div>
       </div>
       <PDFDownloadLink
-          document={<PdfDocument allPrice={item.allPrice} goods={item.mallProducts} storeName={item.mallName} />}
+          document={<PdfDocument allPrice={item.mallAllPrice} goods={item.mallProducts} storeName={item.mallName} />}
           fileName="shopping-list.pdf"
       >
         {({ blob, url, loading, error }) =>
@@ -103,7 +103,7 @@ export default function Compare() {
                   backgroundColor: item.isLow ? "rgb(59 130 246 / 0.5)" : "#777575",
                 }}
             >
-              €{item.allPrice}
+              €{item.mallAllPrice}
             </div>
         }
       </PDFDownloadLink>
